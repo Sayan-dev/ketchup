@@ -1,18 +1,33 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { useTheme } from '@react-navigation/native';
+import { CompositeScreenProps, useTheme } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { MaterialTopTabScreenProps } from '@react-navigation/material-top-tabs';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { ExtendedTheme } from '../types';
+import Typography from '../components/common/Typography';
+import Button from '../components/common/Button';
+import { TabParamList } from '../HomeTabNavigator';
+import { RootStackParamList } from '../RootNavigator';
 
-const HomeScreen = () => {
+type HomeScreenProps = CompositeScreenProps<
+  MaterialTopTabScreenProps<TabParamList, 'Home'>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const theme = useTheme();
+  const logout = async () => {
+    await auth().signOut();
+    navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
+  };
   const styles = React.useMemo(() => createStyles(theme), [theme]);
-
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
+      <Typography style={styles.text}>
         <Text style={styles.what}>Add</Text> some stuff from your fridge
-      </Text>
+      </Typography>
+      <Button onPress={logout}>Log out</Button>
     </View>
   );
 };

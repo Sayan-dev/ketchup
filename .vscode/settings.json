@@ -1,7 +1,8 @@
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
-  "cSpell.words": ["Zustand"]
+  "cSpell.words": ["Zustand"],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

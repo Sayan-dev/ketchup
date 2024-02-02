@@ -1,3 +1,4 @@
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import { MongoDocument } from './common';
 import { GENDER_TYPE } from './enums';
 
@@ -33,4 +34,12 @@ export interface IName {
 export interface INotifications extends MongoDocument {
   title: string;
   message: string;
+}
+
+export interface Recipe extends FirebaseFirestoreTypes.DocumentData {
+  name?: string;
+  description?: string;
+}
+export interface Bookmarks extends FirebaseFirestoreTypes.DocumentData {
+  bookmarks: string[];
 }

@@ -2,7 +2,7 @@ import create, { StateCreator } from 'zustand';
 import { User, UserRegisterRequest } from '../types/entities';
 
 interface UserSlice {
-  User: User | null;
+  user: User | null;
   updateUser: (user: User | null) => void;
 }
 
@@ -14,7 +14,7 @@ interface UserRegisterSlice {
 type Slice = UserSlice & UserRegisterSlice;
 
 const createUserSlice: StateCreator<Slice, [], [], UserSlice> = set => ({
-  User: null,
+  user: null,
   updateUser: (user: User | null) => set(state => ({ ...state, user })),
 });
 

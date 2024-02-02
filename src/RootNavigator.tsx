@@ -10,12 +10,15 @@ import Storage from './utils/storage';
 import { navigationRef } from './utils/navigation';
 import HomeTabNavigator, { TabParamList } from './HomeTabNavigator';
 import GetStartedScreen from './screens/GetStartedScreen';
+import SignupScreen from './screens/SignupScreen';
+import LoginScreen from './screens/LoginScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
-
+  Login?: undefined;
+  Signup?: undefined;
   Verify?: { hash?: string };
-  Start?: undefined;
+  Start: undefined;
   HomeTab?: NavigatorScreenParams<TabParamList>;
 };
 
@@ -76,6 +79,8 @@ const RootNavigator = () => {
           initialRouteName="Splash"
         >
           <Stack.Screen name="Splash" component={SplashScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Start" component={GetStartedScreen} />
           <Stack.Screen name="HomeTab" component={HomeTabNavigator} />
         </Stack.Navigator>

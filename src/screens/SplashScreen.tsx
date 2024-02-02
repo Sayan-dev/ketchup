@@ -7,22 +7,33 @@ import { RootStackParamList } from '../RootNavigator';
 import ScrollLayout from '../components/layouts/ScrollLayout';
 import type { ExtendedTheme } from '../types';
 import Logo from '../assets/images/logo.png';
+import useInitializeFirebase from '../hooks/useInitializeFirebase';
+import { get } from '../utils/storage';
 
 type SplashScreenProps = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
+  const [user, initializing] = useInitializeFirebase();
   const theme = useTheme();
   const styles = React.useMemo(() => createStyles(theme), [theme]);
-
   const bootstrap = async () => {
-    navigation.reset({ index: 1, routes: [{ name: 'Start' }] });
+    if (!initializing) {
+      const introFlag = await get('@intro');
+
+      if (!introFlag) navigation.reset({ index: 1, routes: [{ name: 'Start' }] });
+      else if (!user) {
+        navigation.reset({ index: 1, routes: [{ name: 'Login' }] });
+      } else {
+        navigation.reset({ index: 1, routes: [{ name: 'HomeTab' }] });
+      }
+    }
   };
 
   React.useEffect(() => {
     setTimeout(() => {
       bootstrap();
     }, 2000);
-  }, []);
+  }, [initializing]);
   return (
     <ScrollLayout edges={['top', 'left', 'right']}>
       <View style={styles.container}>

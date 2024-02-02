@@ -14,13 +14,15 @@ export interface Pagination {
 }
 
 export type SignUpRequest = {
-  email?: string;
-  contactNumber?: ContactNumber;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
 };
 
 export type LoginRequest = {
-  email?: string;
-  contactNumber?: ContactNumber;
+  email: string;
   password: string;
 };
 
@@ -28,11 +30,8 @@ export type UserRegisterRequest = {
   firstName?: string;
   middleName?: string;
   lastName?: string;
-  gender: GENDER_TYPE;
-  language: string;
-  contactNumber: ContactNumber;
   email: string;
-  registrationReferralCode?: string;
+  password: string;
 };
 
 export type UserUpdateRequest = {
@@ -41,4 +40,16 @@ export type UserUpdateRequest = {
   lastName?: string;
   language?: string;
   profilePicture?: string;
+};
+
+export type CreateRecipeRequest = {
+  uid?: string;
+  name?: string;
+  description?: string;
+};
+
+export type BookmarkRequest = {
+  uid?: string;
+  recipeId?: string;
+  bookmark?: boolean;
 };

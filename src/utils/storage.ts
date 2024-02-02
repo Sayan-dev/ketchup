@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type StorageKeys = '@auth_token' | '@navigation_state';
+type StorageKeys = '@auth_token' | '@navigation_state' | '@intro';
 
 export const save = async (key: StorageKeys, value: string) => {
   try {
