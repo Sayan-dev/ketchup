@@ -1,4 +1,4 @@
-import create, { StateCreator } from 'zustand';
+import { create, StateCreator } from 'zustand';
 import { User, UserRegisterRequest } from '../types/entities';
 
 interface UserSlice {

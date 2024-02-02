@@ -23,6 +23,7 @@ interface ExtendedTheme extends Theme {
     dark: string;
     accent: string;
     secondary: string;
+    success: string;
     error: string;
     transparent: string;
     lightBackground: string;

@@ -54,8 +54,8 @@ const createStyles = (theme: ExtendedTheme) =>
       backgroundColor: theme.colors.background,
     },
     logo: {
-      width: wp(50),
-      height: wp(50),
+      width: wp(100),
+      height: wp(100),
       resizeMode: 'contain',
     },
   });

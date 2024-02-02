@@ -9,16 +9,16 @@ export interface FontStyles {
 
 const fonts: FontStyles = {
   regular: {
-    fontFamily: 'Manrope-Regular',
+    fontFamily: 'Brandon_reg',
   },
   medium: {
-    fontFamily: 'Manrope-Medium',
+    fontFamily: 'Brandon_med',
   },
   semibold: {
-    fontFamily: 'Manrope-SemiBold',
+    fontFamily: 'Brandon_blk',
   },
   bold: {
-    fontFamily: 'Manrope-Bold',
+    fontFamily: 'Brandon_bld',
   },
 };
 
