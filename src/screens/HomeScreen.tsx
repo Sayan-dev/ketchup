@@ -10,6 +10,8 @@ import Typography from '../components/common/Typography';
 import Button from '../components/common/Button';
 import { TabParamList } from '../HomeTabNavigator';
 import { RootStackParamList } from '../RootNavigator';
+import RecommendedComponent from '../components/home/Recommended';
+import FilterComponent from '../components/home/Filters';
 
 type HomeScreenProps = CompositeScreenProps<
   MaterialTopTabScreenProps<TabParamList, 'Home'>,
@@ -18,16 +20,15 @@ type HomeScreenProps = CompositeScreenProps<
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const theme = useTheme();
   const logout = async () => {
-    await auth().signOut();
-    navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
+    // await auth().signOut();
+    // navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
+    navigation.navigate('ItemDetails');
   };
   const styles = React.useMemo(() => createStyles(theme), [theme]);
   return (
     <View style={styles.container}>
-      <Typography style={styles.text}>
-        <Text style={styles.what}>Add</Text> some stuff from your fridge
-      </Typography>
-      <Button onPress={logout}>Log out</Button>
+      <RecommendedComponent />
+      <FilterComponent />
     </View>
   );
 };
@@ -59,9 +60,7 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     container: {
       flexGrow: 1,
-      alignItems: 'center',
       paddingBottom: wp(25),
-      paddingHorizontal: wp(5),
     },
     logo: {
       width: wp(60),

@@ -8,13 +8,15 @@ import {
 import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { transform } from 'lodash';
 import type { ExtendedTheme, FontSize } from '../../types';
 import Typography from './Typography';
 
 interface ButtonProps extends TouchableOpacityProps {
   children?: string | React.ReactElement;
   isLoading?: boolean;
-  iconName?: string;
+  LeftIconName?: string;
+  RightIconName?: string;
   iconSize?: number;
   fontSize?: keyof FontSize;
   backgroundColor?: keyof ExtendedTheme['colors'];
@@ -25,8 +27,8 @@ const Button: React.FC<ButtonProps> = ({
   children,
   style,
   isLoading = false,
-  iconName,
-
+  LeftIconName,
+  RightIconName,
   iconSize = 28,
   fontSize = 'medium',
   backgroundColor,
@@ -47,7 +49,8 @@ const Button: React.FC<ButtonProps> = ({
       {...props}
       style={[
         styles.container,
-        { paddingRight: iconName ? theme.spacing.lg + 24 : theme.spacing.lg },
+        { paddingLeft: LeftIconName ? theme.spacing.lg + 24 : theme.spacing.lg },
+        { paddingRight: RightIconName ? theme.spacing.lg + 24 : theme.spacing.lg },
         { backgroundColor: backgroundColor ? theme.colors[backgroundColor] : theme.colors.primary },
         style,
       ]}
@@ -58,6 +61,17 @@ const Button: React.FC<ButtonProps> = ({
         isPressed.value = 0;
       }}
     >
+      {LeftIconName ? (
+        <Animated.View style={[iconStyle, styles.leftIcon, { borderRadius: iconSize }]}>
+          {isLoading ? (
+            <ActivityIndicator color={theme.colors.background} size={iconSize} />
+          ) : (
+            <Icon name={LeftIconName} color={theme.colors.background} size={iconSize} />
+          )}
+        </Animated.View>
+      ) : isLoading ? (
+        <ActivityIndicator color={theme.colors.text} size={iconSize} style={styles.loader} />
+      ) : null}
       <Typography
         style={[
           styles.text,
@@ -68,12 +82,12 @@ const Button: React.FC<ButtonProps> = ({
       >
         {children}
       </Typography>
-      {iconName ? (
+      {RightIconName ? (
         <Animated.View style={[iconStyle, styles.rightIcon, { borderRadius: iconSize }]}>
           {isLoading ? (
             <ActivityIndicator color={theme.colors.background} size={iconSize} />
           ) : (
-            <Icon name={iconName} color={theme.colors.background} size={iconSize} />
+            <Icon name={RightIconName} color={theme.colors.background} size={iconSize} />
           )}
         </Animated.View>
       ) : isLoading ? (
@@ -107,6 +121,12 @@ const createStyles = (theme: ExtendedTheme) =>
       padding: theme.spacing.xs,
       position: 'absolute',
       right: 0,
+    },
+    leftIcon: {
+      backgroundColor: theme.colors.accent,
+      padding: theme.spacing.xs,
+      position: 'absolute',
+      left: 0,
     },
     loader: {
       marginLeft: theme.spacing.sm,

@@ -1,10 +1,11 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { heightPercentageToDP, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Button from '../common/Button';
-import OnBoarding1 from '../../assets/images/onboarding1.png';
+
 import type { ExtendedTheme } from '../../types';
+import FruitBasketsvg from '../common/Images/FruitBasketsvg';
 
 interface onboardProps {
   onNext?: () => void;
@@ -20,31 +21,32 @@ const Onboarding1 = ({ onNext, key, handleGettingStarted }: onboardProps) => {
 
   return (
     <View key={key} style={styles.container}>
-      <Image resizeMode="contain" style={styles.onBoardingImage} source={OnBoarding1} />
-      <View style={styles.onBoardingData}>
-        <Text style={styles.onBoardingTextHeader}>Welcome to Ketchup</Text>
-        <Text style={styles.onBoardingTextFooter}>
-          Generate a new recipe from what you have at home
-        </Text>
+      {/* <Image resizeMode="contain" style={styles.onBoardingImage} source={OnBoarding1} /> */}
+      <View style={styles.banner}>
+        <FruitBasketsvg />
       </View>
-      <View>
-        <Text>0</Text>
-        <Text>1</Text>
-        <Text>2</Text>
-      </View>
-      <View style={styles.actionArea}>
-        <Text onAccessibilityAction={handleGettingStarted} style={styles.skip}>
-          Skip
-        </Text>
+      <View style={styles.info}>
+        <View style={styles.onBoardingData}>
+          <Text style={styles.onBoardingTextHeader}>Welcome to Ketchup</Text>
+          <Text style={styles.onBoardingTextFooter}>
+            Generate a new recipe from what you have at home
+          </Text>
+        </View>
 
-        <Button
-          iconSize={40}
-          iconName="keyboard-arrow-right"
-          style={styles.nextButton}
-          onPress={onNext}
-        >
-          Next
-        </Button>
+        <View style={styles.actionArea}>
+          <Text onAccessibilityAction={handleGettingStarted} style={styles.skip}>
+            Skip
+          </Text>
+
+          <Button
+            iconSize={40}
+            RightIconName="keyboard-arrow-right"
+            style={styles.nextButton}
+            onPress={onNext}
+          >
+            Next
+          </Button>
+        </View>
       </View>
     </View>
   );
@@ -56,6 +58,20 @@ const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({
     pagerView: {
       flex: 1,
+    },
+    banner: {
+      flex: 1,
+      flexDirection: 'column-reverse',
+      alignItems: 'center',
+
+      backgroundColor: theme.colors.primary,
+      height: heightPercentageToDP(50),
+      paddingBottom: heightPercentageToDP(5),
+    },
+    info: {
+      height: heightPercentageToDP(40),
+      paddingHorizontal: wp(5),
+      justifyContent: 'space-evenly',
     },
     buttonText: {
       color: theme.colors.secondary,
@@ -71,7 +87,7 @@ const createStyles = (theme: ExtendedTheme) =>
       borderTopWidth: 0.5,
       paddingVertical: wp(10),
       borderColor: theme.colors.lightBackground,
-      width: '80%',
+      width: '100%',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -83,25 +99,19 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     onBoardingData: {
       marginTop: wp(5),
-      paddingHorizontal: wp(10),
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     onBoardingTextHeader: {
       fontSize: 20,
       ...theme.fonts.bold,
-      fontWeight: '800',
       color: theme.colors.text,
-      textAlign: 'center',
     },
     onBoardingTextFooter: {
       marginTop: wp(5),
-      fontSize: 14,
+      fontSize: 16,
       lineHeight: 25,
       color: theme.colors.accent,
-      textAlign: 'center',
     },
     onBoardingImage: {
       height: wp(70),
@@ -109,8 +119,5 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     container: {
       flexGrow: 1,
-      alignItems: 'center',
-      justifyContent: 'space-evenly',
-      paddingTop: wp(30),
     },
   });

@@ -12,6 +12,7 @@ import HomeTabNavigator, { TabParamList } from './HomeTabNavigator';
 import GetStartedScreen from './screens/GetStartedScreen';
 import SignupScreen from './screens/SignupScreen';
 import LoginScreen from './screens/LoginScreen';
+import ItemDetailsScreen from './screens/ItemDetailsScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -19,6 +20,7 @@ export type RootStackParamList = {
   Signup?: undefined;
   Verify?: { hash?: string };
   Start: undefined;
+  ItemDetails?: undefined;
   HomeTab?: NavigatorScreenParams<TabParamList>;
 };
 
@@ -82,6 +84,7 @@ const RootNavigator = () => {
           <Stack.Screen name="Signup" component={SignupScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Start" component={GetStartedScreen} />
+          <Stack.Screen name="ItemDetails" component={ItemDetailsScreen} />
           <Stack.Screen name="HomeTab" component={HomeTabNavigator} />
         </Stack.Navigator>
       </NavigationContainer>

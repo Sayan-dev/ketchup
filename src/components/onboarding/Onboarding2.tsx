@@ -1,10 +1,11 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { heightPercentageToDP, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Button from '../common/Button';
 import OnBoarding2 from '../../assets/images/onboarding2.png';
 import type { ExtendedTheme } from '../../types';
+import FruitBasketsvg from '../common/Images/FruitBasketsvg';
 
 interface onboardProps {
   handleGettingStarted?: () => void;
@@ -19,22 +20,21 @@ const Onboarding1 = ({ key, handleGettingStarted }: onboardProps) => {
 
   return (
     <View key={key} style={styles.container}>
-      <Image resizeMode="contain" style={styles.onBoardingImage} source={OnBoarding2} />
-      <View style={styles.onBoardingData}>
-        <Text style={styles.onBoardingTextHeader}>Welcome to Ketchup</Text>
-        <Text style={styles.onBoardingTextFooter}>
-          Generate a new recipe from what you have at home
-        </Text>
+      <View style={styles.banner}>
+        <FruitBasketsvg />
       </View>
-      <View>
-        <Text>0</Text>
-        <Text>1</Text>
-        <Text>2</Text>
-      </View>
-      <View style={styles.actionArea}>
-        <Button style={styles.getStartedButton} onPress={handleGettingStarted}>
-          Get Started
-        </Button>
+      <View style={styles.info}>
+        <View style={styles.onBoardingData}>
+          <Text style={styles.onBoardingTextHeader}>Get The Freshest Fruit Salad Combo</Text>
+          <Text style={styles.onBoardingTextFooter}>
+            We deliver the best and freshest fruit salad in town. Order for a combo today!!!
+          </Text>
+        </View>
+        <View style={styles.actionArea}>
+          <Button style={styles.getStartedButton} onPress={handleGettingStarted}>
+            Let's Continue
+          </Button>
+        </View>
       </View>
     </View>
   );
@@ -47,11 +47,20 @@ const createStyles = (theme: ExtendedTheme) =>
     pagerView: {
       flex: 1,
     },
-    getStartedButton: {
-      width: '100%',
-      justifyContent: 'center',
-      paddingVertical: theme.spacing.md,
-      borderRadius: 40,
+    banner: {
+      flex: 1,
+      flexDirection: 'column-reverse',
+      alignItems: 'center',
+
+      backgroundColor: theme.colors.primary,
+      height: heightPercentageToDP(50),
+      paddingBottom: heightPercentageToDP(5),
+    },
+    info: {
+      alignItems: 'flex-start',
+      height: heightPercentageToDP(40),
+      paddingHorizontal: wp(5),
+      justifyContent: 'space-evenly',
     },
     buttonText: {
       color: theme.colors.secondary,
@@ -59,38 +68,49 @@ const createStyles = (theme: ExtendedTheme) =>
     skipButton: {
       backgroundColor: theme.colors.background,
     },
-
+    getStartedButton: {
+      width: '100%',
+      justifyContent: 'center',
+      paddingVertical: theme.spacing.md,
+      borderRadius: 10,
+    },
+    nextButton: {
+      paddingVertical: theme.spacing.md,
+      borderRadius: 40,
+    },
     actionArea: {
       borderTopWidth: 0.5,
       paddingVertical: wp(10),
       borderColor: theme.colors.lightBackground,
-      width: '80%',
+      width: '100%',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
     },
+    skip: {
+      fontSize: 16,
+      color: theme.colors.text,
+    },
     onBoardingData: {
       marginTop: wp(5),
-      paddingHorizontal: wp(10),
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
     },
     onBoardingTextHeader: {
       fontSize: 20,
-      ...theme.fonts.bold,
-      fontWeight: '800',
+      ...theme.fonts.medium,
       color: theme.colors.text,
-      textAlign: 'center',
     },
     onBoardingTextFooter: {
       marginTop: wp(5),
-      fontSize: 14,
+      paddingRight: wp(5),
+
+      fontSize: 16,
       lineHeight: 25,
       color: theme.colors.accent,
-      textAlign: 'center',
     },
     onBoardingImage: {
       height: wp(70),
@@ -98,8 +118,5 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     container: {
       flexGrow: 1,
-      alignItems: 'center',
-      justifyContent: 'space-evenly',
-      paddingTop: wp(30),
     },
   });

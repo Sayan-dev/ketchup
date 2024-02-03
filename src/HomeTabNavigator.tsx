@@ -21,8 +21,6 @@ const HomeTabNavigator: React.FC = () => (
     tabBar={props => <TabBar {...(props as TabBarProps)} />}
   >
     <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Home' }} />
-    <Tab.Screen name="Explore" component={HomeScreen} options={{ tabBarLabel: 'Explore' }} />
-    <Tab.Screen name="Order" component={HomeScreen} options={{ tabBarLabel: 'Order' }} />
   </Tab.Navigator>
 );
 
