@@ -5,8 +5,8 @@ import HomeScreen from './screens/HomeScreen';
 
 export type TabParamList = {
   Home: undefined;
-  Explore: undefined;
-  Order: undefined;
+  Orders: undefined;
+  Favorites: undefined;
 };
 
 const Tab = createMaterialTopTabNavigator<TabParamList>();
@@ -15,12 +15,14 @@ const HomeTabNavigator: React.FC = () => (
   <Tab.Navigator
     initialRouteName="Home"
     screenOptions={{
-      swipeEnabled: true,
+      swipeEnabled: false,
     }}
     tabBarPosition="bottom"
     tabBar={props => <TabBar {...(props as TabBarProps)} />}
   >
     <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Home' }} />
+    <Tab.Screen name="Orders" component={HomeScreen} options={{ tabBarLabel: 'Orders' }} />
+    <Tab.Screen name="Favorites" component={HomeScreen} options={{ tabBarLabel: 'Likes' }} />
   </Tab.Navigator>
 );
 
