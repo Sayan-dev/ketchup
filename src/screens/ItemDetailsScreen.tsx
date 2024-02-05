@@ -14,11 +14,13 @@ import Counter from '../components/ItemDetails/Counter';
 import InfoComponent from '../components/ItemDetails/Info';
 import Suggestions from '../components/ItemDetails/Suggestion';
 import ActionArea from '../components/ItemDetails/ActionArea';
+import useProductStore from '../store/product/selector';
 
 type ItemDetailsProps = NativeStackScreenProps<RootStackParamList, 'ItemDetails'>;
 
 const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
   const theme = useTheme();
+  const [selectedItem, selectProduct] = useProductStore();
 
   const styles = React.useMemo(() => createStyles(theme), [theme]);
 
@@ -32,7 +34,7 @@ const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
           <Preview />
         </View>
         <View style={styles.detailing}>
-          <Text style={styles.label}>Quinoa Fruit Salad</Text>
+          <Text style={styles.label}>{selectedItem?.name}</Text>
           <Counter />
           <InfoComponent />
           <Suggestions />

@@ -36,10 +36,11 @@ export interface INotifications extends MongoDocument {
   message: string;
 }
 
-export interface Recipe extends FirebaseFirestoreTypes.DocumentData {
+export interface Product extends MongoDocument {
   name?: string;
-  description?: string;
-}
-export interface Bookmarks extends FirebaseFirestoreTypes.DocumentData {
-  bookmarks: string[];
+  image_url?: string;
+  lastName?: string;
+  like?: boolean;
+  ingredients?: string;
+  suggestions?: string;
 }

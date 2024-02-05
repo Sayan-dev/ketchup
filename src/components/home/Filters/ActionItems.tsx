@@ -1,19 +1,33 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ExtendedTheme } from '../../../types';
+import { Product } from '../../../types/entities';
 
-const ActionItems = () => {
+type Props = {
+  selectItem: (product: Product) => void;
+  itemDetails: Product;
+};
+
+const ActionItems = ({ selectItem, itemDetails }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
+  const handleSelectProduct = () => {
+    selectItem(itemDetails);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.price}>
         <Text style={styles.body}>$</Text>
         <Text style={styles.body}>2000</Text>
       </View>
-      <Text style={[styles.body, styles.add]}>+</Text>
+      <TouchableOpacity>
+        <Text onPress={handleSelectProduct} style={[styles.body, styles.add]}>
+          +
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

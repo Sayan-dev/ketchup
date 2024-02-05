@@ -4,8 +4,11 @@ import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import Counter from './Counter';
 import Price from './Price';
+import useProductStore from '../../../store/product/selector';
 
 const CounterComponent = () => {
+  const [, selectProduct] = useProductStore();
+
   const theme = useTheme();
 
   const styles = createStyles(theme);

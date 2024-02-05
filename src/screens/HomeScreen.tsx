@@ -24,10 +24,12 @@ type HomeScreenProps = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>
 >;
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+  const [, selectProduct] = useProductStore();
   const theme = useTheme();
-  const logout = async () => {
+  const selectItem = async (product: Product) => {
     // await auth().signOut();
     // navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
+    selectProduct(product);
     navigation.navigate('ItemDetails');
   };
   const styles = React.useMemo(() => createStyles(theme), [theme]);
@@ -36,8 +38,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       <TopBar />
       <Heading />
       <Search />
-      <RecommendedComponent />
-      <FilterComponent />
+      <RecommendedComponent selectItem={selectItem} />
+      <FilterComponent selectItem={selectItem} />
     </ScrollView>
   );
 };

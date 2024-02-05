@@ -4,23 +4,48 @@ import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import Preview from '../Images/PreviewImage';
 
-type Props = {
-  label: string;
-  ActionItems: React.FC;
+type options = {
+  card?: {
+    width?: number;
+    height?: number;
+    paddingHorizontal?: number;
+  };
+  image?: {
+    width: number;
+    height: number;
+  };
+  logo?: {
+    flex: number;
+  };
 };
 
-const ItemCard = ({ label, ActionItems }: Props) => {
+type Props = {
+  label: string;
+  ActionItems: JSX.Element;
+  options?: options;
+};
+
+const ItemCard = ({ label, ActionItems, options }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
-    <View style={styles.container}>
-      <View style={styles.logo}>
-        <Preview width={80} height={80} />
+    <View
+      style={[
+        styles.container,
+        {
+          width: options?.card?.width || 160,
+          height: options?.card?.height || 185,
+          paddingHorizontal: options?.card?.paddingHorizontal || 20,
+        },
+      ]}
+    >
+      <View style={[styles.logo, { flex: options?.logo?.flex || 3 }]}>
+        <Preview width={options?.image?.width || 80} height={options?.image?.height || 80} />
       </View>
       <View style={styles.content}>
         <Text style={styles.body}>{label}</Text>
-        {ActionItems && <ActionItems />}
+        {ActionItems && ActionItems}
       </View>
     </View>
   );
@@ -31,8 +56,6 @@ export default ItemCard;
 const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({
     container: {
-      width: 160,
-      height: 185,
       backgroundColor: theme.colors.background,
       paddingHorizontal: 20,
       borderRadius: 20,
@@ -51,6 +74,6 @@ const createStyles = (theme: ExtendedTheme) =>
     content: {
       flex: 2,
       paddingTop: 5,
-      alignItems: 'center',
+      alignItems: 'flex-start',
     },
   });

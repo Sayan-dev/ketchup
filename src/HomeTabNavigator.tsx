@@ -18,7 +18,7 @@ const HomeTabNavigator: React.FC = () => (
       swipeEnabled: false,
     }}
     tabBarPosition="bottom"
-    tabBar={props => <TabBar {...(props as TabBarProps)} />}
+    // tabBar={props => <TabBar {...(props as TabBarProps)} />}
   >
     <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Home' }} />
     <Tab.Screen name="Orders" component={HomeScreen} options={{ tabBarLabel: 'Orders' }} />
