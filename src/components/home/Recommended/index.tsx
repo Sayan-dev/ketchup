@@ -5,31 +5,43 @@ import LinearGradient from 'react-native-linear-gradient';
 import { ExtendedTheme } from '../../../types';
 import ItemCard from '../../common/Card/ItemCard';
 import ActionItems from './ActionItems';
+import { Product } from '../../../types/entities';
 
 const products = [
   {
+    _id: '1',
+    name: 'Quinoa fruit salad',
+    ingredients: 'Red Quinoa, Lime, Honey, Blueberries, Strawberries, Mango, Fresh mint.',
+    suggestions:
+      'If you are looking for a new fruit salad to eat today, quinoa is the perfect brunch for you.',
+    price: 200000,
+    like: false,
+  },
+  {
+    _id: '2',
     name: 'Honey lime combo',
     price: 200000,
     like: false,
   },
   {
+    _id: '3',
     name: 'Honey lime combo',
     price: 200000,
     like: false,
   },
   {
-    name: 'Honey lime combo',
-    price: 200000,
-    like: false,
-  },
-  {
+    _id: '4',
     name: 'Honey lime combo',
     price: 200000,
     like: false,
   },
 ];
 
-const RecommendedComponent = () => {
+type Props = {
+  selectItem: (product: Product) => void;
+};
+
+const RecommendedComponent = ({ selectItem }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
@@ -43,7 +55,11 @@ const RecommendedComponent = () => {
         >
           <ScrollView horizontal style={styles.products}>
             {products.map(product => (
-              <ItemCard label={product.name} ActionItems={ActionItems} />
+              <ItemCard
+                label={product.name}
+                ActionItems={<ActionItems itemDetails={product} selectItem={selectItem} />}
+                options={{ image: { width: 80, height: 80 } }}
+              />
             ))}
           </ScrollView>
         </LinearGradient>
@@ -58,7 +74,7 @@ const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      paddingVertical: 20,
+      paddingTop: 20,
     },
     body: {
       fontSize: 16,
