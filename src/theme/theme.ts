@@ -9,7 +9,7 @@ const AppTheme: ExtendedTheme = {
     lightBackground: '#FFF2E7',
     card: '#070707',
     text: '#27214D',
-    border: '#A9A9A9',
+    border: '#F4F4F4',
     primary: '#FFA451',
     accent: '#27214D',
     success: '#4CD964',

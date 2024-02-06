@@ -6,6 +6,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { MaterialTopTabScreenProps } from '@react-navigation/material-top-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import type { ExtendedTheme } from '../types';
 import Typography from '../components/common/Typography';
 import Button from '../components/common/Button';
@@ -34,13 +35,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
   const styles = React.useMemo(() => createStyles(theme), [theme]);
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TopBar />
-      <Heading />
-      <Search />
-      <RecommendedComponent selectItem={selectItem} />
-      <FilterComponent selectItem={selectItem} />
-    </ScrollView>
+      <ScrollView style={styles.content}>
+        <Heading />
+        <Search />
+        <RecommendedComponent selectItem={selectItem} />
+        <FilterComponent selectItem={selectItem} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -53,4 +56,7 @@ const createStyles = (theme: ExtendedTheme) =>
       paddingLeft: 24,
     },
     headerDescription: { fontSize: 20, color: theme.colors.primary },
+    content: {
+      marginTop: 70,
+    },
   });

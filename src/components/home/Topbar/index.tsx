@@ -1,11 +1,7 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import LinearGradient from 'react-native-linear-gradient';
 import { ExtendedTheme } from '../../../types';
-import ItemCard from '../../common/Card/ItemCard';
-import ActionItems from './ActionItems';
-import { Product } from '../../../types/entities';
 
 const TopBar = () => {
   const theme = useTheme();
@@ -26,6 +22,11 @@ const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      zIndex: 1000,
+      position: 'absolute',
+      top: 0,
+      width: '100%',
+      backgroundColor: theme.colors.background,
       paddingVertical: 20,
     },
     body: {
