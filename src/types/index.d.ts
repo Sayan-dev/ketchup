@@ -24,6 +24,8 @@ interface ExtendedTheme extends Theme {
     accent: string;
     secondary: string;
     success: string;
+    formBackground: string;
+    formText: string;
     error: string;
     transparent: string;
     lightBackground: string;

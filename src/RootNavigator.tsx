@@ -13,6 +13,8 @@ import SignupScreen from './screens/SignupScreen';
 import LoginScreen from './screens/LoginScreen';
 import ItemDetailsScreen from './screens/ItemDetailsScreen';
 import HomeScreen from './screens/HomeScreen';
+import TrackOrderScreen from './screens/TrackOrderScreen';
+import SuccessScreen from './screens/SuccessScreen';
 import OrderScreen from './screens/OrderScreen';
 
 export type RootStackParamList = {
@@ -24,13 +26,15 @@ export type RootStackParamList = {
   ItemDetails?: undefined;
   Home?: undefined;
   Orders?: undefined;
+  Success?: undefined;
+  Track?: undefined;
 };
 
 const linking = {
   prefixes: ['ketchup://'],
   config: {
     screens: {
-      Verify: 'verify/:hash',
+      Home: 'Home',
     },
   },
 };
@@ -89,6 +93,8 @@ const RootNavigator = () => {
           <Stack.Screen name="ItemDetails" component={ItemDetailsScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Orders" component={OrderScreen} />
+          <Stack.Screen name="Success" component={SuccessScreen} />
+          <Stack.Screen name="Track" component={TrackOrderScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

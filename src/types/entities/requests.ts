@@ -53,3 +53,8 @@ export type BookmarkRequest = {
   recipeId?: string;
   bookmark?: boolean;
 };
+
+export type CheckoutDetails = {
+  phoneNumber: string;
+  address: string;
+};

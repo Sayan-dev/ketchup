@@ -2,7 +2,7 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import TabBar, { TabBarProps } from './components/TabBar';
 import HomeScreen from './screens/HomeScreen';
-import OrderScreen from './screens/OrderScreen';
+import OrderScreen from './screens/TrackOrderScreen';
 
 export type TabParamList = {
   Home: undefined;

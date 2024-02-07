@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
-import Preview from '../../common/Images/PreviewImage';
 
 interface Props {
   total: number;

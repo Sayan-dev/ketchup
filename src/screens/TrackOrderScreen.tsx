@@ -12,46 +12,28 @@ import OrderList from '../components/orders/OrderList';
 import CheckoutBar from '../components/orders/Checkout';
 import useOrderStore from '../store/order/selector';
 import CheckoutModal from '../components/orders/CheckoutModal';
+import Typography from '../components/common/Typography';
 
-type OrderScreenProps = NativeStackScreenProps<RootStackParamList, 'Orders'>;
+type TrackOrderScreenProps = NativeStackScreenProps<RootStackParamList, 'Track'>;
 
-const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProps) => {
+const TrackOrderScreen: React.FC<TrackOrderScreenProps> = ({
+  navigation,
+}: TrackOrderScreenProps) => {
   const theme = useTheme();
   const [orders, total] = useOrderStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const goBack = async () => {
-    // await auth().signOut();
-    // navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
-    navigation.goBack();
-  };
-
-  const handleCheckout = () => {
-    console.log('Hi');
-    setIsModalVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleBookOrder = () => {
-    navigation.navigate('Success');
-    handleCloseModal();
-  };
-
   const styles = React.useMemo(() => createStyles(theme), [theme]);
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar goBack={goBack} />
-      <OrderList orders={orders} />
-      <CheckoutBar total={total} checkout={handleCheckout} />
-      <CheckoutModal open={isModalVisible} onClose={handleCloseModal} bookOrder={handleBookOrder} />
+      <View>
+        <Typography>Track Order</Typography>
+      </View>
     </SafeAreaView>
   );
 };
 
-export default OrderScreen;
+export default TrackOrderScreen;
 
 const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({

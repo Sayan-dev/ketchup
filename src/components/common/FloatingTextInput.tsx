@@ -98,7 +98,7 @@ const FloatingTextInput = React.forwardRef<TextInput, FloatingTextInputProps>(
         ) : null}
         <View style={[styles.textInputContainer, inputContainerStyle]}>
           <TextInput
-            selectionColor={theme.colors.primary}
+            selectionColor={theme.colors.text}
             accessibilityLabel={name}
             {...props}
             value={value}
@@ -149,8 +149,8 @@ const createStyles = (theme: ExtendedTheme, isError?: boolean) =>
       flex: 1,
       ...theme.fonts.regular,
       color: theme.colors.text,
-      fontSize: theme.fontSize.large,
-      paddingHorizontal: theme.spacing.md,
+      fontSize: theme.fontSize.medium,
+      paddingHorizontal: theme.spacing.lg,
       paddingVertical: theme.spacing.sm,
       margin: 0,
       borderWidth: 0,

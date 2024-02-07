@@ -2,22 +2,24 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
-import Preview from '../../common/Images/PreviewImage';
 import Total from './Total';
 import Button from '../../common/Button';
 
 interface Props {
   total: number;
+  checkout: () => void;
 }
 
-const CheckoutBar = ({ total }: Props) => {
+const CheckoutBar = ({ total, checkout }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
       <Total total={total} />
-      <Button style={styles.checkoutButton}>Checkout</Button>
+      <Button onPress={checkout} style={styles.checkoutButton}>
+        Checkout
+      </Button>
     </View>
   );
 };

@@ -12,46 +12,36 @@ import OrderList from '../components/orders/OrderList';
 import CheckoutBar from '../components/orders/Checkout';
 import useOrderStore from '../store/order/selector';
 import CheckoutModal from '../components/orders/CheckoutModal';
+import Typography from '../components/common/Typography';
+import Button from '../components/common/Button';
 
-type OrderScreenProps = NativeStackScreenProps<RootStackParamList, 'Orders'>;
+type SuccessScreenProps = NativeStackScreenProps<RootStackParamList, 'Success'>;
 
-const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProps) => {
+const SuccessScreen: React.FC<SuccessScreenProps> = ({ navigation }: SuccessScreenProps) => {
   const theme = useTheme();
   const [orders, total] = useOrderStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const goBack = async () => {
-    // await auth().signOut();
-    // navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
-    navigation.goBack();
+  const handleTrackOrder = () => {
+    navigation.navigate('Track');
   };
 
-  const handleCheckout = () => {
-    console.log('Hi');
-    setIsModalVisible(true);
+  const handleContinueShopping = () => {
+    navigation.popToTop();
   };
-
-  const handleCloseModal = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleBookOrder = () => {
-    navigation.navigate('Success');
-    handleCloseModal();
-  };
-
   const styles = React.useMemo(() => createStyles(theme), [theme]);
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar goBack={goBack} />
-      <OrderList orders={orders} />
-      <CheckoutBar total={total} checkout={handleCheckout} />
-      <CheckoutModal open={isModalVisible} onClose={handleCloseModal} bookOrder={handleBookOrder} />
+      <View>
+        <Typography>Success</Typography>
+      </View>
+      <Button onPress={handleTrackOrder}>Track Order</Button>
+      <Button onPress={handleContinueShopping}>Continue Shopping</Button>
     </SafeAreaView>
   );
 };
 
-export default OrderScreen;
+export default SuccessScreen;
 
 const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({
