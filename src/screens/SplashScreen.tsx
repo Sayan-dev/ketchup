@@ -24,7 +24,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
       else if (!user) {
         navigation.reset({ index: 1, routes: [{ name: 'Login' }] });
       } else {
-        navigation.reset({ index: 1, routes: [{ name: 'HomeTab' }] });
+        navigation.reset({ index: 1, routes: [{ name: 'Home' }] });
       }
     }
   };

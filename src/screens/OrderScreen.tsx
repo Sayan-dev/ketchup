@@ -6,16 +6,12 @@ import { MaterialTopTabScreenProps } from '@react-navigation/material-top-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ExtendedTheme } from '../types';
-import { TabParamList } from '../HomeTabNavigator';
 import { RootStackParamList } from '../RootNavigator';
 import TopBar from '../components/orders/Topbar';
 import OrderList from '../components/orders/OrderList';
 import CheckoutBar from '../components/orders/Checkout';
 
-type OrderScreenProps = CompositeScreenProps<
-  MaterialTopTabScreenProps<TabParamList, 'Orders'>,
-  NativeStackScreenProps<RootStackParamList>
->;
+type OrderScreenProps = NativeStackScreenProps<RootStackParamList, 'Orders'>;
 
 const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProps) => {
   const theme = useTheme();

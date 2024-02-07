@@ -10,7 +10,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import type { ExtendedTheme } from '../types';
 import Typography from '../components/common/Typography';
 import Button from '../components/common/Button';
-import { TabParamList } from '../HomeTabNavigator';
 import { RootStackParamList } from '../RootNavigator';
 import RecommendedComponent from '../components/home/Recommended';
 import FilterComponent from '../components/home/Filters';
@@ -20,10 +19,7 @@ import Heading from '../components/home/Heading';
 import TopBar from '../components/home/Topbar';
 import Search from '../components/home/Search';
 
-type HomeScreenProps = CompositeScreenProps<
-  MaterialTopTabScreenProps<TabParamList, 'Home'>,
-  NativeStackScreenProps<RootStackParamList>
->;
+type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [, selectProduct] = useProductStore();
   const theme = useTheme();

@@ -8,11 +8,12 @@ import SplashScreen from './screens/SplashScreen';
 import AppTheme from './theme/theme';
 import Storage from './utils/storage';
 import { navigationRef } from './utils/navigation';
-import HomeTabNavigator, { TabParamList } from './HomeTabNavigator';
 import GetStartedScreen from './screens/GetStartedScreen';
 import SignupScreen from './screens/SignupScreen';
 import LoginScreen from './screens/LoginScreen';
 import ItemDetailsScreen from './screens/ItemDetailsScreen';
+import HomeScreen from './screens/HomeScreen';
+import OrderScreen from './screens/OrderScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -21,7 +22,8 @@ export type RootStackParamList = {
   Verify?: { hash?: string };
   Start: undefined;
   ItemDetails?: undefined;
-  HomeTab?: NavigatorScreenParams<TabParamList>;
+  Home?: undefined;
+  Orders?: undefined;
 };
 
 const linking = {
@@ -85,7 +87,8 @@ const RootNavigator = () => {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Start" component={GetStartedScreen} />
           <Stack.Screen name="ItemDetails" component={ItemDetailsScreen} />
-          <Stack.Screen name="HomeTab" component={HomeTabNavigator} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Orders" component={OrderScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

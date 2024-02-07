@@ -40,7 +40,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     Login.mutate(data, {
       onSuccess: async () => {
         const introFlag = await get('@intro');
-        if (introFlag) navigation.reset({ index: 1, routes: [{ name: 'HomeTab' }] });
+        if (introFlag) navigation.reset({ index: 1, routes: [{ name: 'Home' }] });
         else {
           navigation.reset({ index: 1, routes: [{ name: 'Start' }] });
         }
