@@ -3,15 +3,25 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 
-const Counter = () => {
+interface Props {
+  add: () => void;
+  sub: () => void;
+  count: number;
+}
+
+const Counter = ({ add, sub, count }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      <Text style={[styles.body, styles.sub]}>-</Text>
-      <Text style={[styles.body, styles.count]}>1</Text>
-      <Text style={[styles.body, styles.add]}>+</Text>
+      <Text onPress={sub} style={[styles.body, styles.sub]}>
+        -
+      </Text>
+      <Text style={[styles.body, styles.count]}>{count}</Text>
+      <Text onPress={add} style={[styles.body, styles.add]}>
+        +
+      </Text>
     </View>
   );
 };
@@ -41,6 +51,7 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     count: {
       marginHorizontal: 20,
+
       textAlign: 'center',
     },
     add: {

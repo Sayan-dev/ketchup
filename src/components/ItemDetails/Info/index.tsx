@@ -28,7 +28,7 @@ const createStyles = (theme: ExtendedTheme) =>
     container: {
       paddingTop: 32,
       borderBottomWidth: 2,
-      borderBottomColor: theme.colors.secondary,
+      borderBottomColor: theme.colors.border,
     },
     body: {
       fontSize: 16,

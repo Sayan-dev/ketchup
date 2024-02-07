@@ -3,6 +3,7 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import Preview from '../Images/PreviewImage';
+import { Product } from '../../../types/entities';
 
 type options = {
   card?: {
@@ -20,12 +21,12 @@ type options = {
 };
 
 type Props = {
-  label: string;
+  data: Product;
   ActionItems: JSX.Element;
   options?: options;
 };
 
-const ItemCard = ({ label, ActionItems, options }: Props) => {
+const ItemCard = ({ data, ActionItems, options }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
@@ -44,7 +45,7 @@ const ItemCard = ({ label, ActionItems, options }: Props) => {
         <Preview width={options?.image?.width || 80} height={options?.image?.height || 80} />
       </View>
       <View style={styles.content}>
-        <Text style={styles.body}>{label}</Text>
+        <Text style={styles.body}>{data.name}</Text>
         {ActionItems && ActionItems}
       </View>
     </View>

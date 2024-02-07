@@ -5,16 +5,21 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ExtendedTheme } from '../../../types';
 import Order from './Order';
+import { Order as OrderEntity } from '../../../types/entities';
 
-const OrderList = () => {
+interface Props {
+  orders: Record<string, OrderEntity>;
+}
+
+const OrderList = ({ orders }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'].map(order => (
-          <Order />
+        {Object.values(orders).map(order => (
+          <Order data={order} />
         ))}
       </ScrollView>
     </SafeAreaView>

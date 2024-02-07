@@ -96,7 +96,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             <Button
               onPress={onSubmit}
               style={styles.button}
-              iconName="arrow-right"
+              RightIconName="arrow-right"
               // isLoading={login.isLoading}
             >
               Login

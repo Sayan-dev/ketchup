@@ -2,14 +2,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
+import { Order } from '../../../types/entities';
 
-const Cost = () => {
+interface Props {
+  data: Order;
+}
+
+const Cost = ({ data }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      <Text style={styles.cost}>$2000</Text>
+      <Text style={styles.cost}>${data.price}</Text>
     </View>
   );
 };

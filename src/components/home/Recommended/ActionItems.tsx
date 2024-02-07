@@ -20,7 +20,7 @@ const ActionItems = ({ selectItem, itemDetails }: Props) => {
     <View style={styles.container}>
       <View style={styles.price}>
         <Text style={styles.body}>$</Text>
-        <Text style={styles.body}>2000</Text>
+        <Text style={styles.body}>{itemDetails.price}</Text>
       </View>
       <TouchableOpacity>
         <Text onPress={handleSelectProduct} style={[styles.body, styles.add]}>

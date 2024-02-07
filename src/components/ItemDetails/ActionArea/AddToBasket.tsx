@@ -4,13 +4,19 @@ import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import Button from '../../common/Button';
 
-const AddToBasketButton = () => {
+interface Props {
+  onPress: () => void;
+}
+
+const AddToBasketButton = ({ onPress }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      <Button style={styles.addButton}>Add to basket</Button>
+      <Button onPress={onPress} style={styles.addButton}>
+        Add to basket
+      </Button>
     </View>
   );
 };

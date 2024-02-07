@@ -6,16 +6,18 @@ import Preview from '../../common/Images/PreviewImage';
 import Total from './Total';
 import Button from '../../common/Button';
 
-const CheckoutBar = () => {
+interface Props {
+  total: number;
+}
+
+const CheckoutBar = ({ total }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      <Total />
-      <Button style={{ flex: 2, width: '100%', paddingVertical: 14, justifyContent: 'center' }}>
-        Checkout
-      </Button>
+      <Total total={total} />
+      <Button style={styles.checkoutButton}>Checkout</Button>
     </View>
   );
 };
@@ -39,4 +41,5 @@ const createStyles = (theme: ExtendedTheme) =>
       ...theme.fonts.medium,
       fontSize: 16,
     },
+    checkoutButton: { flex: 2, width: '100%', paddingVertical: 14, justifyContent: 'center' },
   });

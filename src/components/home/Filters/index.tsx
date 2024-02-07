@@ -14,25 +14,25 @@ const products = [
     ingredients: 'Red Quinoa, Lime, Honey, Blueberries, Strawberries, Mango, Fresh mint.',
     suggestions:
       'If you are looking for a new fruit salad to eat today, quinoa is the perfect brunch for you.',
-    price: 200000,
+    price: 3000,
     like: false,
   },
   {
     _id: '2',
     name: 'Honey lime combo',
-    price: 200000,
+    price: 2000,
     like: false,
   },
   {
     _id: '3',
     name: 'Honey lime combo',
-    price: 200000,
+    price: 2000,
     like: false,
   },
   {
     _id: '4',
     name: 'Honey lime combo',
-    price: 200000,
+    price: 2000,
     like: false,
   },
 ];
@@ -56,7 +56,7 @@ const FilterComponent = ({ selectItem }: Props) => {
           <ScrollView horizontal style={styles.products}>
             {products.map(product => (
               <ItemCard
-                label={product.name}
+                data={product}
                 ActionItems={<ActionItems itemDetails={product} selectItem={selectItem} />}
                 options={{
                   image: { width: 60, height: 60 },

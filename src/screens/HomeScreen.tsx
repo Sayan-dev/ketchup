@@ -1,15 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React from 'react';
-import { CompositeScreenProps, useTheme } from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { MaterialTopTabScreenProps } from '@react-navigation/material-top-tabs';
+import { useTheme } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { ExtendedTheme } from '../types';
-import Typography from '../components/common/Typography';
-import Button from '../components/common/Button';
 import { RootStackParamList } from '../RootNavigator';
 import RecommendedComponent from '../components/home/Recommended';
 import FilterComponent from '../components/home/Filters';
@@ -26,7 +21,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const selectItem = async (product: Product) => {
     // await auth().signOut();
     // navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
-    selectProduct(product);
+    selectProduct({ ...product, quantity: 1 });
     navigation.navigate('ItemDetails');
   };
   const styles = React.useMemo(() => createStyles(theme), [theme]);

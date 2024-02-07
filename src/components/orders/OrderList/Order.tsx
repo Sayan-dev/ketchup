@@ -5,8 +5,13 @@ import { ExtendedTheme } from '../../../types';
 import Preview from '../../common/Images/PreviewImage';
 import Cost from './Cost';
 import Details from './Details';
+import { Order as OrderEntity } from '../../../types/entities';
 
-const Order = () => {
+interface Props {
+  data: OrderEntity;
+}
+
+const Order = ({ data }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
@@ -16,10 +21,10 @@ const Order = () => {
         <View style={styles.image}>
           <Preview height={40} width={40} />
         </View>
-        <Details />
+        <Details data={data} />
       </View>
 
-      <Cost />
+      <Cost data={data} />
     </View>
   );
 };
@@ -43,6 +48,9 @@ const createStyles = (theme: ExtendedTheme) =>
       borderRadius: 10,
       padding: 12,
       marginRight: 16,
+      borderColor: theme.colors.primary,
+      borderWidth: 1,
+      backgroundColor: theme.colors.lightBackground,
     },
     info: {
       flexDirection: 'row',

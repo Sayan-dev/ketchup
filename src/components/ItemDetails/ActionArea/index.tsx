@@ -5,14 +5,18 @@ import { ExtendedTheme } from '../../../types';
 import LikeButton from './Like';
 import AddToBasketButton from './AddToBasket';
 
-const ActionArea = () => {
+interface Props {
+  basketAction: () => void;
+}
+
+const ActionArea = ({ basketAction }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
       <LikeButton />
-      <AddToBasketButton />
+      <AddToBasketButton onPress={basketAction} />
     </View>
   );
 };

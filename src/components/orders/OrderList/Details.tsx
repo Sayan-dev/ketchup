@@ -3,15 +3,20 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import Preview from '../../common/Images/PreviewImage';
+import { Order } from '../../../types/entities';
 
-const Details = () => {
+interface Props {
+  data: Order;
+}
+
+const Details = ({ data }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      <Text style={styles.name}>Quinoa fruit salad</Text>
-      <Text>2 packs</Text>
+      <Text style={styles.name}>{data.name}</Text>
+      <Text>{data.quantity} packs</Text>
     </View>
   );
 };

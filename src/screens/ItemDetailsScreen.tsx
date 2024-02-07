@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '@react-navigation/native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import Storage from '../utils/storage';
 import { RootStackParamList } from '../RootNavigator';
 import RootStackNavigationHeader from '../components/common/Header/StackNavigation/RootStackNavigationHeader';
 import { ExtendedTheme } from '../types';
@@ -15,14 +14,57 @@ import InfoComponent from '../components/ItemDetails/Info';
 import Suggestions from '../components/ItemDetails/Suggestion';
 import ActionArea from '../components/ItemDetails/ActionArea';
 import useProductStore from '../store/product/selector';
+import useOrderStore from '../store/order/selector';
 
 type ItemDetailsProps = NativeStackScreenProps<RootStackParamList, 'ItemDetails'>;
 
 const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
   const theme = useTheme();
-  const [selectedItem, selectProduct] = useProductStore();
+  const [count, setCount] = useState(0);
+  const [selectedItem, , , addProduct, subProduct] = useProductStore();
+  const [orders, , createOrder, addOrder, subOrder] = useOrderStore();
 
   const styles = React.useMemo(() => createStyles(theme), [theme]);
+
+  useEffect(() => {
+    if (selectedItem) {
+      if (orders[selectedItem._id]) setCount(orders[selectedItem._id].quantity);
+      else setCount(selectedItem.quantity || 0);
+    } else setCount(0);
+  }, [selectedItem?.quantity, selectedItem && orders[selectedItem._id]?.quantity]);
+
+  const navigateToOrderScreen = () => {
+    navigation.navigate('Orders');
+  };
+
+  const handleCreateOrder = () => {
+    if (selectedItem) {
+      if (orders[selectedItem._id]) return;
+      createOrder(selectedItem);
+    }
+  };
+
+  const handleAddOrder = () => {
+    if (selectedItem) {
+      if (orders[selectedItem._id]) addOrder(selectedItem._id);
+      else {
+        addProduct();
+      }
+    }
+  };
+  const handleSubOrder = () => {
+    if (selectedItem) {
+      if (orders[selectedItem._id]) subOrder(selectedItem._id);
+      else {
+        subProduct();
+      }
+    }
+  };
+
+  const handleAddToBasket = () => {
+    handleCreateOrder();
+    navigateToOrderScreen();
+  };
 
   return (
     <BaseLayout backgroundColor={theme.colors.primary}>
@@ -35,10 +77,15 @@ const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
         </View>
         <View style={styles.detailing}>
           <Text style={styles.label}>{selectedItem?.name}</Text>
-          <Counter />
+          <Counter
+            data={selectedItem && selectedItem}
+            add={handleAddOrder}
+            sub={handleSubOrder}
+            count={count}
+          />
           <InfoComponent />
           <Suggestions />
-          <ActionArea />
+          <ActionArea basketAction={handleAddToBasket} />
         </View>
       </View>
     </BaseLayout>

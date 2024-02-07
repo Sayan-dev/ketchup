@@ -10,11 +10,13 @@ import { RootStackParamList } from '../RootNavigator';
 import TopBar from '../components/orders/Topbar';
 import OrderList from '../components/orders/OrderList';
 import CheckoutBar from '../components/orders/Checkout';
+import useOrderStore from '../store/order/selector';
 
 type OrderScreenProps = NativeStackScreenProps<RootStackParamList, 'Orders'>;
 
 const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProps) => {
   const theme = useTheme();
+  const [orders, total] = useOrderStore();
   const goBack = async () => {
     // await auth().signOut();
     // navigation.getParent()?.reset({ index: 1, routes: [{ name: 'Login' }] });
@@ -24,8 +26,8 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProp
   return (
     <SafeAreaView style={styles.container}>
       <TopBar goBack={goBack} />
-      <OrderList />
-      <CheckoutBar />
+      <OrderList orders={orders} />
+      <CheckoutBar total={total} />
     </SafeAreaView>
   );
 };

@@ -4,14 +4,18 @@ import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import Preview from '../../common/Images/PreviewImage';
 
-const Total = () => {
+interface Props {
+  total: number;
+}
+
+const Total = ({ total }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
       <Text style={styles.name}>Total</Text>
-      <Text style={styles.cost}>$ 20000</Text>
+      <Text style={styles.cost}>$ {total}</Text>
     </View>
   );
 };

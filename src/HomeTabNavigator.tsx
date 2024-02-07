@@ -23,7 +23,6 @@ const HomeTabNavigator: React.FC = () => (
   >
     <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Home' }} />
     <Tab.Screen name="Orders" component={OrderScreen} options={{ tabBarLabel: 'Orders' }} />
-    <Tab.Screen name="Favorites" component={HomeScreen} options={{ tabBarLabel: 'Likes' }} />
   </Tab.Navigator>
 );
 

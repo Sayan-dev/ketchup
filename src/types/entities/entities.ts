@@ -41,6 +41,11 @@ export interface Product extends MongoDocument {
   image_url?: string;
   lastName?: string;
   like?: boolean;
+  price: number;
   ingredients?: string;
   suggestions?: string;
+}
+
+export interface Order extends Product {
+  quantity: number;
 }
