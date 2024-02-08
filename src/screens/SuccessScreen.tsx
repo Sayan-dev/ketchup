@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { CompositeScreenProps, useTheme } from '@react-navigation/native';
 
@@ -14,6 +14,7 @@ import useOrderStore from '../store/order/selector';
 import CheckoutModal from '../components/orders/CheckoutModal';
 import Typography from '../components/common/Typography';
 import Button from '../components/common/Button';
+import Success from '../assets/images/Success.png';
 
 type SuccessScreenProps = NativeStackScreenProps<RootStackParamList, 'Success'>;
 
@@ -32,10 +33,18 @@ const SuccessScreen: React.FC<SuccessScreenProps> = ({ navigation }: SuccessScre
   const styles = React.useMemo(() => createStyles(theme), [theme]);
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Typography>Success</Typography>
+      <View style={styles.message}>
+        <Image source={Success} style={styles.image} />
+        <Typography fontStyle="medium" fontSize={32}>
+          Congratulations!!!
+        </Typography>
+        <Typography fontStyle="regular" fontSize={20} style={styles.messagebody}>
+          Your order have been taken and is being attended to
+        </Typography>
       </View>
-      <Button onPress={handleTrackOrder}>Track Order</Button>
+      <Button style={styles.button} onPress={handleTrackOrder}>
+        Track Order
+      </Button>
       <Button onPress={handleContinueShopping}>Continue Shopping</Button>
     </SafeAreaView>
   );
@@ -47,5 +56,24 @@ const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({
     container: {
       flexGrow: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    message: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 64,
+      marginBottom: 56,
+    },
+    messagebody: {
+      textAlign: 'center',
+    },
+    image: {
+      width: 164,
+      height: 164,
+      marginBottom: 56,
+    },
+    button: {
+      marginBottom: 48,
     },
   });
