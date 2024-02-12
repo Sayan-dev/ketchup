@@ -39,11 +39,13 @@ export interface INotifications extends MongoDocument {
 export interface Product extends MongoDocument {
   name?: string;
   image_url?: string;
-  lastName?: string;
   like?: boolean;
   price: number;
-  ingredients?: string;
+  ingredients?: Ingredient[];
   suggestions?: string;
+}
+export interface Ingredient extends MongoDocument {
+  name?: string;
 }
 
 export interface Order extends Product {

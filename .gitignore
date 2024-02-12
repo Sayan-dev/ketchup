@@ -65,3 +65,4 @@ buck-out/
 # Environment
 .env*
 !.env.example
+android/app/release/app-release.apk

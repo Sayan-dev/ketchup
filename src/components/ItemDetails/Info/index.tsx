@@ -3,6 +3,7 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import useProductStore from '../../../store/product/selector';
+import { getIngredientString } from '../../../utils/helper';
 
 const InfoComponent = () => {
   const [selectedProduct] = useProductStore();
@@ -14,7 +15,7 @@ const InfoComponent = () => {
     <View style={styles.container}>
       <Text style={[styles.body, styles.label]}>One Pack Contains:</Text>
       <Text style={[styles.body, styles.info]}>
-        {selectedProduct?.ingredients}
+        {getIngredientString(selectedProduct?.ingredients || [])}
         {/* Red Quinoa, Lime, Honey, Blueberries, Strawberries, Mango, Fresh mint. */}
       </Text>
     </View>

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, UseFormReturn, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { ExtendedTheme } from '../../../types';
@@ -13,30 +13,18 @@ import Button from '../../common/Button';
 
 interface Props {
   open: boolean;
+  form: UseFormReturn<CheckoutDetails, any, undefined>;
   onClose: () => void;
-  bookOrder: () => void;
+  onSubmit: () => void;
 }
 
-const schema = yup.object().shape({
-  address: yup.string().max(200).required('Required'),
-  phoneNumber: yup.string().max(11).required('Required'),
-});
-
-const CheckoutModal = ({ open, onClose, bookOrder }: Props) => {
+const CheckoutModal = ({ open, onClose, form, onSubmit }: Props) => {
   const theme = useTheme();
-  const form = useForm<CheckoutDetails>({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      address: '',
-      phoneNumber: '',
-    },
-  });
 
   const inputs = React.useRef<Record<keyof CheckoutDetails, TextInput | null>>({
     address: null,
-    phoneNumber: null,
+    contact: null,
   });
-
   const styles = createStyles(theme);
   return (
     <BottomModal isVisible={open} onClose={onClose}>
@@ -56,26 +44,26 @@ const CheckoutModal = ({ open, onClose, bookOrder }: Props) => {
             keyboardType="default"
             autoCapitalize="none"
             returnKeyType="next"
-            onNext={() => inputs.current.phoneNumber?.focus()}
+            onNext={() => inputs.current.contact?.focus()}
           />
           <Typography fontStyle="medium" fontSize={20}>
             Number we can call
           </Typography>
           <ControlledFloatingTextInput
             ref={el => {
-              inputs.current.address = el;
+              inputs.current.contact = el;
             }}
-            name="phoneNumber"
+            name="contact"
             placeholder="8100838105"
             inputContainerStyle={styles.formInputStyle}
             placeholderTextColor={theme.colors.formText}
             keyboardType="number-pad"
             autoCapitalize="none"
             returnKeyType="next"
-            onNext={() => inputs.current.phoneNumber?.blur()}
+            onNext={() => inputs.current.contact?.blur()}
           />
           <View style={styles.actionbuttons}>
-            <Button onPress={bookOrder}>Pay on delivery</Button>
+            <Button onPress={onSubmit}>Pay on delivery</Button>
             <Button>Pay with card</Button>
           </View>
         </FormProvider>

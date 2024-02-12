@@ -80,14 +80,18 @@ type HTTPOptions = {
  * HTTP GET Request
  */
 const fetchGet = async <T extends ResponseError>(url: string, options?: HTTPOptions) => {
-  const result = await fetch(getURL(url, { baseURL: options?.baseURL }), {
-    method: 'GET',
-    headers: await getHeader(options?.headers),
-  });
-
-  const response: T = await result.json();
-  handleError(result.status, response);
-  return response;
+  try {
+    const result = await fetch(getURL(url, { baseURL: options?.baseURL }), {
+      method: 'GET',
+      headers: await getHeader(options?.headers),
+    });
+    const response: T = await result.json();
+    console.log(response, 'Thios is the result');
+    handleError(result.status, response);
+    return response;
+  } catch (error) {
+    console.log(error, 'I am here');
+  }
 };
 
 /**

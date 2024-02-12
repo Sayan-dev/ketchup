@@ -15,16 +15,18 @@ import Suggestions from '../components/ItemDetails/Suggestion';
 import ActionArea from '../components/ItemDetails/ActionArea';
 import useProductStore from '../store/product/selector';
 import useOrderStore from '../store/order/selector';
+import { useProduct } from '../api/queries/product.queries';
 
 type ItemDetailsProps = NativeStackScreenProps<RootStackParamList, 'ItemDetails'>;
 
 const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
   const theme = useTheme();
   const [count, setCount] = useState(0);
-  const [selectedItem, , , addProduct, subProduct] = useProductStore();
+  const [selectedItem, selectProduct, , addProduct, subProduct] = useProductStore();
   const [orders, , createOrder, addOrder, subOrder] = useOrderStore();
 
   const styles = React.useMemo(() => createStyles(theme), [theme]);
+  const product = useProduct(selectedItem?._id);
 
   useEffect(() => {
     if (selectedItem) {

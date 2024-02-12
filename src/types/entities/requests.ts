@@ -55,6 +55,6 @@ export type BookmarkRequest = {
 };
 
 export type CheckoutDetails = {
-  phoneNumber: string;
+  contact: string;
   address: string;
 };

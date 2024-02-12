@@ -13,10 +13,12 @@ import { Product } from '../types/entities';
 import Heading from '../components/home/Heading';
 import TopBar from '../components/home/Topbar';
 import Search from '../components/home/Search';
+import { useProducts } from '../api/queries/product.queries';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [, selectProduct] = useProductStore();
+  const products = useProducts();
   const theme = useTheme();
   const selectItem = async (product: Product) => {
     // await auth().signOut();
@@ -32,7 +34,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <Heading />
         <Search />
         <RecommendedComponent selectItem={selectItem} />
-        <FilterComponent selectItem={selectItem} />
+        <FilterComponent selectItem={selectItem} products={products.data || []} />
       </ScrollView>
     </SafeAreaView>
   );
