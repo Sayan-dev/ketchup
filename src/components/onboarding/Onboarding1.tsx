@@ -81,6 +81,7 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     nextButton: {
       paddingVertical: theme.spacing.md,
+      paddingHorizontal: theme.spacing.xl,
       borderRadius: 40,
     },
     actionArea: {

@@ -1,11 +1,11 @@
-import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import React from 'react';
 import * as yup from 'yup';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginRequest, SignUpRequest, UserRegisterRequest } from '../types/entities';
+import { SignUpRequest, UserRegisterRequest } from '../types/entities';
 import { RootStackParamList } from '../RootNavigator';
 import type { ExtendedTheme } from '../types';
 import ScrollLayout from '../components/layouts/ScrollLayout';
@@ -15,6 +15,7 @@ import ControlledFloatingTextInput from '../components/common/form/ControlledFlo
 import PasswordInput from '../components/common/form/PasswordInput';
 import { useRegister } from '../api/queries/auth.queries';
 import { remove } from '../utils/storage';
+import { useUser } from '../store/selector';
 
 const schema = yup.object().shape({
   email: yup.string().email('Must be a valid email').required('Required'),
@@ -29,6 +30,7 @@ type SignupScreenProps = NativeStackScreenProps<RootStackParamList, 'Signup'>;
 const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
   const theme = useTheme();
   const styles = React.useMemo(() => createStyles(theme), [theme]);
+  const [, updateUser] = useUser();
 
   const form = useForm<UserRegisterRequest>({
     resolver: yupResolver(schema),
@@ -43,12 +45,17 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
 
   const signUp = useRegister();
   const onSubmit = form.handleSubmit(async data => {
-    signUp.mutate(data, {
-      onSuccess: async () => {
-        await remove('@intro');
-        navigation.reset({ index: 1, routes: [{ name: 'Start' }] });
+    signUp.mutate(
+      { data, password: data.password },
+      {
+        onSuccess: async () => {
+          updateUser(userData || null);
+
+          await remove('@intro');
+          navigation.reset({ index: 1, routes: [{ name: 'HomeDrawer' }] });
+        },
       },
-    });
+    );
   });
 
   const inputs = React.useRef<Record<keyof SignUpRequest, TextInput | null>>({
@@ -126,7 +133,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
             <Button
               onPress={onSubmit}
               style={styles.button}
-              iconName="arrow-right"
+              RightIconName="arrow-right"
               // isLoading={login.isLoading}
             >
               Sign Up
@@ -163,6 +170,8 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     button: {
       marginTop: 'auto',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
     },
     signUpContainer: {
       flexDirection: 'row',

@@ -22,7 +22,7 @@ export const useCreateOrder = () =>
     },
   );
 
-export const useOrders = () =>
+export const useGetOrders = () =>
   useQuery(['orders'], async () => {
     const res = await fetchAllOrders();
     return res?.data;

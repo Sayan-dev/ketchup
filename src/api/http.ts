@@ -1,5 +1,5 @@
 import { API_BASE } from 'react-native-dotenv';
-import { get } from '../utils/storage';
+import auth from '@react-native-firebase/auth';
 import * as NavigationService from '../utils/navigation';
 
 /**
@@ -18,10 +18,9 @@ const getHeader = async (headers = new Headers(), hasFiles = false): Promise<Hea
     defaultHeaders.delete('Content-Type');
   }
 
-  const token = await get('@auth_token');
-
-  if (token) {
-    defaultHeaders.append('Authorization', `Bearer ${token}`);
+  if (auth().currentUser) {
+    const idToken = await auth().currentUser?.getIdToken();
+    defaultHeaders.append('Authorization', `Bearer ${idToken}`);
   }
 
   return defaultHeaders;
@@ -80,18 +79,13 @@ type HTTPOptions = {
  * HTTP GET Request
  */
 const fetchGet = async <T extends ResponseError>(url: string, options?: HTTPOptions) => {
-  try {
-    const result = await fetch(getURL(url, { baseURL: options?.baseURL }), {
-      method: 'GET',
-      headers: await getHeader(options?.headers),
-    });
-    const response: T = await result.json();
-    console.log(response, 'Thios is the result');
-    handleError(result.status, response);
-    return response;
-  } catch (error) {
-    console.log(error, 'I am here');
-  }
+  const result = await fetch(getURL(url, { baseURL: options?.baseURL }), {
+    method: 'GET',
+    headers: await getHeader(options?.headers),
+  });
+  const response: T = await result.json();
+  handleError(result.status, response);
+  return response;
 };
 
 /**

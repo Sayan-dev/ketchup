@@ -4,5 +4,6 @@
     "source.fixAll.eslint": "explicit"
   },
   "cSpell.words": ["Zustand"],
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.compile.nullAnalysis.mode": "automatic"
 }

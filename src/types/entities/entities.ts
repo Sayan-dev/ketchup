@@ -51,3 +51,15 @@ export interface Ingredient extends MongoDocument {
 export interface Order extends Product {
   quantity: number;
 }
+
+export interface PreviousOrderItems {
+  orderId: string;
+  productId: string;
+  product: Product;
+}
+export interface PreviousOrder {
+  orderItems: PreviousOrderItems[];
+  address: string;
+  contact: string;
+  total: number;
+}

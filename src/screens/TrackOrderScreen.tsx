@@ -22,8 +22,9 @@ import OrderStep2 from '../assets/images/order_step_2.png';
 import OrderStep3 from '../assets/images/order_step_3.png';
 import Success from '../assets/images/BigSuccess.png';
 import DottedBorder from '../components/track/DottedBorder';
-import Topbar from '../components/track/Topbar';
 import Map from '../assets/images/maps_preview.png';
+import Topbar from '../components/common/TopBar';
+import BaseLayout from '../components/layouts/BaseLayout';
 
 type TrackOrderScreenProps = NativeStackScreenProps<RootStackParamList, 'Track'>;
 
@@ -38,8 +39,8 @@ const TrackOrderScreen: React.FC<TrackOrderScreenProps> = ({
   };
   const styles = React.useMemo(() => createStyles(theme), [theme]);
   return (
-    <SafeAreaView style={styles.container}>
-      <Topbar goBack={handleGoBack} />
+    <BaseLayout backgroundColor={theme.colors.primary}>
+      <Topbar title="Delivery Status" goBack={handleGoBack} />
       <View style={styles.order}>
         <TrackRow
           name="Order Taken"
@@ -79,7 +80,7 @@ const TrackOrderScreen: React.FC<TrackOrderScreenProps> = ({
           progressImage={progressSuccess}
         />
       </View>
-    </SafeAreaView>
+    </BaseLayout>
   );
 };
 
@@ -87,10 +88,6 @@ export default TrackOrderScreen;
 
 const createStyles = (theme: ExtendedTheme) =>
   StyleSheet.create({
-    container: {
-      flexGrow: 1,
-      alignItems: 'center',
-    },
     order: {
       width: widthPercentageToDP(100),
 

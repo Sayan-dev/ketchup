@@ -55,7 +55,7 @@ const FloatingTextInput = React.forwardRef<TextInput, FloatingTextInputProps>(
     const styles = React.useMemo(() => createStyles(theme, !!error), [theme, error]);
 
     const labelStyle = useAnimatedStyle(() => ({
-      color: error ? theme.colors.error : theme.colors.border,
+      color: error ? theme.colors.error : theme.colors.text,
     }));
 
     const errorTextStyle = useAnimatedStyle(() => ({

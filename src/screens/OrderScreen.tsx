@@ -8,15 +8,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 import { ExtendedTheme } from '../types';
 import { RootStackParamList } from '../RootNavigator';
-import TopBar from '../components/orders/Topbar';
+
 import OrderList from '../components/orders/OrderList';
 import CheckoutBar from '../components/orders/Checkout';
 import useOrderStore from '../store/order/selector';
 import CheckoutModal from '../components/orders/CheckoutModal';
 import { useCreateOrder } from '../api/queries/order.queries';
 import { CheckoutDetails } from '../types/entities';
+import { DrawerParamList } from '../HomeDrawerNavigator';
+import Topbar from '../components/common/TopBar';
+import Loading from '../components/common/Loader/LoadingModal';
 
 type OrderScreenProps = NativeStackScreenProps<RootStackParamList, 'Orders'>;
 
@@ -29,7 +33,6 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProp
   const theme = useTheme();
   const [orders, total] = useOrderStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  console.log('hello');
 
   const createOrder = useCreateOrder();
   const goBack = async () => {
@@ -45,7 +48,6 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProp
   });
 
   const handleCheckout = () => {
-    console.log('Hi');
     setIsModalVisible(true);
   };
 
@@ -54,8 +56,6 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProp
   };
 
   const handleBookOrder = form.handleSubmit(async ({ address, contact }) => {
-    console.log('hello');
-
     const orderList = Object.keys(orders).map(id => ({
       productId: id,
       quantity: orders[id].quantity,
@@ -74,9 +74,6 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProp
           handleCloseModal();
           navigation.navigate('Success');
         },
-        onError: err => {
-          console.log(err, 'Error');
-        },
       },
     );
   });
@@ -84,7 +81,8 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ navigation }: OrderScreenProp
   const styles = React.useMemo(() => createStyles(theme), [theme]);
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar goBack={goBack} />
+      <Loading loadingText="Please wait while we book your order" open={createOrder.isLoading} />
+      <Topbar goBack={goBack} title="My Basket" />
       <OrderList orders={orders} />
       <CheckoutBar total={total} checkout={handleCheckout} />
       <CheckoutModal

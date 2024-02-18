@@ -63,8 +63,25 @@ const CheckoutModal = ({ open, onClose, form, onSubmit }: Props) => {
             onNext={() => inputs.current.contact?.blur()}
           />
           <View style={styles.actionbuttons}>
-            <Button onPress={onSubmit}>Pay on delivery</Button>
-            <Button>Pay with card</Button>
+            <Button
+              backgroundColor="background"
+              textColor="primary"
+              borderWidth={1}
+              style={styles.actionButton}
+              RightIconName="arrow-right-alt"
+              onPress={onSubmit}
+            >
+              Pay on delivery
+            </Button>
+            <Button
+              backgroundColor="background"
+              textColor="primary"
+              borderWidth={1}
+              style={styles.actionButton}
+              RightIconName="arrow-right-alt"
+            >
+              Pay with card
+            </Button>
           </View>
         </FormProvider>
       </View>
@@ -82,7 +99,8 @@ const createStyles = (theme: ExtendedTheme) =>
       backgroundColor: theme.colors.background,
       height: '100%',
       paddingHorizontal: 24,
-      paddingVertical: 40,
+      paddingTop: 40,
+      paddingBottom: 20,
     },
 
     button: {
@@ -101,5 +119,11 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     actionbuttons: {
       flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    actionButton: {
+      marginBottom: 5,
+      fontSize: 16,
+      padding: 16,
     },
   });

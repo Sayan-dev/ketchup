@@ -42,10 +42,19 @@ const SuccessScreen: React.FC<SuccessScreenProps> = ({ navigation }: SuccessScre
           Your order have been taken and is being attended to
         </Typography>
       </View>
-      <Button style={styles.button} onPress={handleTrackOrder}>
+      <Button fontSize="medium" style={styles.button} onPress={handleTrackOrder}>
         Track Order
       </Button>
-      <Button onPress={handleContinueShopping}>Continue Shopping</Button>
+      <Button
+        fontSize="medium"
+        borderWidth={1}
+        backgroundColor="background"
+        style={styles.continue}
+        textColor="primary"
+        onPress={handleContinueShopping}
+      >
+        Continue Shopping
+      </Button>
     </SafeAreaView>
   );
 };
@@ -75,5 +84,11 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     button: {
       marginBottom: 48,
+      paddingHorizontal: 32,
+      paddingVertical: 16,
+    },
+    continue: {
+      paddingHorizontal: 32,
+      paddingVertical: 16,
     },
   });

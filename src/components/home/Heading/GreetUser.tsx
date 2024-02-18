@@ -1,14 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 import React from 'react';
-import { ExtendedTheme } from '../../../types';
+import type { ExtendedTheme } from '../../../types';
+import { User } from '../../../types/entities';
 
-const GreetUser = () => {
+interface Props {
+  user?: User | null;
+}
+
+const GreetUser = ({ user }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
-  return <Text style={styles.text}>Hello Tony,</Text>;
+  return <Text style={styles.text}>Hello {user?.firstName},</Text>;
 };
 
 export default GreetUser;

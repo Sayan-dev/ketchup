@@ -16,6 +16,7 @@ import ActionArea from '../components/ItemDetails/ActionArea';
 import useProductStore from '../store/product/selector';
 import useOrderStore from '../store/order/selector';
 import { useProduct } from '../api/queries/product.queries';
+import Topbar from '../components/common/TopBar';
 
 type ItemDetailsProps = NativeStackScreenProps<RootStackParamList, 'ItemDetails'>;
 
@@ -71,7 +72,7 @@ const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
   return (
     <BaseLayout backgroundColor={theme.colors.primary}>
       <View style={styles.heading}>
-        <RootStackNavigationHeader goBack={navigation.goBack} />
+        <Topbar title="" goBack={navigation.goBack} />
       </View>
       <View style={styles.subContainer}>
         <View style={styles.preview}>
@@ -114,7 +115,7 @@ const createStyles = (theme: ExtendedTheme) =>
       alignItems: 'center',
     },
     detailing: {
-      flex: 2,
+      flex: 2.2,
       paddingTop: heightPercentageToDP(3),
       alignItems: 'stretch',
       paddingHorizontal: widthPercentageToDP(5),

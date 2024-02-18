@@ -4,6 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import Preview from '../Images/PreviewImage';
 import { Product } from '../../../types/entities';
+import Typography from '../Typography';
 
 type options = {
   card?: {
@@ -45,7 +46,9 @@ const ItemCard = ({ data, ActionItems, options }: Props) => {
         <Preview width={options?.image?.width || 80} height={options?.image?.height || 80} />
       </View>
       <View style={styles.content}>
-        <Text style={styles.body}>{data.name}</Text>
+        <Typography numberOfLines={1} ellipsizeMode="tail" style={styles.body}>
+          {data.name}
+        </Typography>
         {ActionItems && ActionItems}
       </View>
     </View>

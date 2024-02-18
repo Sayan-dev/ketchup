@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import type { ExtendedTheme, FontSize } from '../../types';
+import Typography from '../Typography';
 
 const ModalHeader = ({ title }: { title: string }) => {
   const theme = useTheme();
@@ -16,7 +17,7 @@ const ModalHeader = ({ title }: { title: string }) => {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.text}>{title}</Text>
+      <Typography style={styles.text}>{title}</Typography>
     </View>
   );
 };

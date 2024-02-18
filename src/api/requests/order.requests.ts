@@ -1,4 +1,4 @@
-import { ApiResponse, Order } from '../../types/entities';
+import { ApiResponse, Order, PreviousOrder } from '../../types/entities';
 import http from '../http';
 
 const BASE_URL = '/api/order';
@@ -22,6 +22,6 @@ export const createOrder = async (data: OrderRequest) => {
 };
 
 export const fetchAllOrders = async () => {
-  const response = await http.get<ApiResponse<Order[]>>(`${BASE_URL}`);
+  const response = await http.get<ApiResponse<PreviousOrder[]>>(`${BASE_URL}`);
   return response;
 };

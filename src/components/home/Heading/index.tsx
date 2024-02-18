@@ -3,17 +3,22 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 
 import { widthPercentageToDP } from 'react-native-responsive-screen';
-import { ExtendedTheme } from '../../../types';
+import type { ExtendedTheme } from '../../../types';
 import GreetUser from './GreetUser';
+import { User } from '../../../types/entities';
 
-const Heading = () => {
+interface Props {
+  user?: User | null;
+}
+
+const Heading = ({ user }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>
-        <GreetUser />
+        <GreetUser user={user} />
         What fruit salad combo do you want today?
       </Text>
     </View>

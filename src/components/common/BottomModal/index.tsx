@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 import RNModal from 'react-native-modal';
 import { useTheme } from '@react-navigation/native';
 
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { ExtendedTheme } from '../../../types';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import type { ExtendedTheme } from '../../../types';
 import ModalHeader from './Header';
 import ModalContainer from './Container';
 import ModalBody from './Body';

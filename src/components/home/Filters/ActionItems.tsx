@@ -4,6 +4,8 @@ import { useTheme } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ExtendedTheme } from '../../../types';
 import { Product } from '../../../types/entities';
+import Typography from '../../common/Typography';
+import { getModifiedAmount } from '../../../utils/helper';
 
 type Props = {
   selectItem: (product: Product) => void;
@@ -21,13 +23,17 @@ const ActionItems = ({ selectItem, itemDetails }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.price}>
-        <Text style={styles.body}>$</Text>
-        <Text style={styles.body}>{itemDetails.price}</Text>
+        <Typography fontStyle="medium" color="primary">
+          $
+        </Typography>
+        <Typography fontStyle="medium" color="primary">
+          {getModifiedAmount(itemDetails.price)}
+        </Typography>
       </View>
       <TouchableOpacity>
-        <Text onPress={handleSelectProduct} style={[styles.body, styles.add]}>
+        <Typography onPress={handleSelectProduct} style={styles.add}>
           +
-        </Text>
+        </Typography>
       </TouchableOpacity>
     </View>
   );

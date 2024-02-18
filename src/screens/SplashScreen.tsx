@@ -9,13 +9,20 @@ import type { ExtendedTheme } from '../types';
 import Logo from '../assets/images/logo.png';
 import useInitializeFirebase from '../hooks/useInitializeFirebase';
 import { get } from '../utils/storage';
+import { useGetUser, useLogin } from '../api/queries/auth.queries';
+import { useUser } from '../store/selector';
 
 type SplashScreenProps = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
   const [user, initializing] = useInitializeFirebase();
+  const [, updateUser] = useUser();
+  const dbUser = useGetUser();
+
   const theme = useTheme();
   const styles = React.useMemo(() => createStyles(theme), [theme]);
+
+  console.log('Hello');
   const bootstrap = async () => {
     if (!initializing) {
       const introFlag = await get('@intro');
@@ -24,16 +31,17 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
       else if (!user) {
         navigation.reset({ index: 1, routes: [{ name: 'Login' }] });
       } else {
-        navigation.reset({ index: 1, routes: [{ name: 'Home' }] });
+        updateUser(dbUser.data?.user || null);
+        navigation.reset({ index: 1, routes: [{ name: 'HomeDrawer' }] });
       }
     }
   };
 
   React.useEffect(() => {
-    setTimeout(() => {
+    if (dbUser.data) {
       bootstrap();
-    }, 2000);
-  }, [initializing]);
+    }
+  }, [initializing, dbUser.data]);
   return (
     <ScrollLayout edges={['top', 'left', 'right']}>
       <View style={styles.container}>

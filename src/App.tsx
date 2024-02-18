@@ -17,7 +17,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import useAppState from './hooks/useAppState';
 import useOnlineManager from './hooks/useOnlineManager';
 import RootNavigator from './RootNavigator';
-import useStore from './store';
+import useUserStore from './store';
 
 // TODO: ISSUE: React Native Flipper is not working with RN 0.69
 // https://github.com/facebook/flipper/issues/3859
@@ -50,7 +50,7 @@ const App = () => {
   React.useEffect(() => {
     if (__DEV__) {
       // eslint-disable-next-line no-console
-      useStore.subscribe(state => console.log('Zustand: ', JSON.stringify(state, null, 2)));
+      useUserStore.subscribe(state => console.log('Zustand: ', JSON.stringify(state, null, 2)));
     }
   }, []);
 

@@ -16,6 +16,7 @@ import HomeScreen from './screens/HomeScreen';
 import TrackOrderScreen from './screens/TrackOrderScreen';
 import SuccessScreen from './screens/SuccessScreen';
 import OrderScreen from './screens/OrderScreen';
+import HomeDrawerNavigator from './HomeDrawerNavigator';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -24,7 +25,7 @@ export type RootStackParamList = {
   Verify?: { hash?: string };
   Start: undefined;
   ItemDetails?: undefined;
-  Home?: undefined;
+  HomeDrawer?: undefined;
   Orders?: undefined;
   Success?: undefined;
   Track?: undefined;
@@ -34,7 +35,7 @@ const linking = {
   prefixes: ['ketchup://'],
   config: {
     screens: {
-      Home: 'Home',
+      HomeDrawer: 'HomeDrawer',
     },
   },
 };
@@ -89,12 +90,17 @@ const RootNavigator = () => {
           <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Signup" component={SignupScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
+
           <Stack.Screen name="Start" component={GetStartedScreen} />
-          <Stack.Screen name="ItemDetails" component={ItemDetailsScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Orders" component={OrderScreen} />
-          <Stack.Screen name="Success" component={SuccessScreen} />
-          <Stack.Screen name="Track" component={TrackOrderScreen} />
+
+          <Stack.Screen name="HomeDrawer" component={HomeDrawerNavigator} />
+          {/* Order */}
+          <Stack.Group>
+            <Stack.Screen name="ItemDetails" component={ItemDetailsScreen} />
+            <Stack.Screen name="Orders" component={OrderScreen} />
+            <Stack.Screen name="Success" component={SuccessScreen} />
+            <Stack.Screen name="Track" component={TrackOrderScreen} />
+          </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

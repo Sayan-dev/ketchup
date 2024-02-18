@@ -24,9 +24,9 @@ const createUserRegisterSlice: StateCreator<Slice, [], [], UserRegisterSlice> = 
     set(state => ({ ...state, registeredUser })),
 });
 
-const useStore = create<Slice>()((...rest) => ({
+const useUserStore = create<Slice>()((...rest) => ({
   ...createUserSlice(...rest),
   ...createUserRegisterSlice(...rest),
 }));
 
-export default useStore;
+export default useUserStore;

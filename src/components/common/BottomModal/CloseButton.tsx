@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Typography from '../Typography';
-import { ExtendedTheme } from '../../../types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import type { ExtendedTheme } from '../../../types';
 
 interface Props {
   onClose: () => void;
@@ -16,9 +16,9 @@ const CloseButton = ({ onClose }: Props) => {
 
   return (
     <TouchableOpacity style={styles.container}>
-      <Typography onPress={onClose} style={styles.close}>
-        X
-      </Typography>
+      <View style={styles.close}>
+        <Icon color={theme.colors.text} name="close" size={32} onPress={onClose} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -36,7 +36,6 @@ const createStyles = (theme: ExtendedTheme) =>
     close: {
       justifyContent: 'center',
       alignItems: 'center',
-      textAlign: 'center',
       width: 48,
       height: 48,
       borderRadius: 48,

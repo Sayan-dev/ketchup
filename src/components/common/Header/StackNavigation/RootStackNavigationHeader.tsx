@@ -19,7 +19,10 @@ const RootStackNavigationHeader: React.FC<StackHeaderProps> = ({ goBack }) => {
       <Button
         LeftIconName="keyboard-arrow-left"
         textColor="text"
-        iconSize={30}
+        style={styles.backButton}
+        iconSize={36}
+        borderRadius={20}
+        fontSize="medium"
         backgroundColor="background"
         onPress={goBack}
       >
@@ -39,5 +42,10 @@ const createStyles = (theme: ExtendedTheme) =>
       justifyContent: 'space-between',
       alignItems: 'center',
       flexDirection: 'row',
+      paddingVertical: 20,
+      paddingHorizontal: 24,
+    },
+    backButton: {
+      paddingRight: 10,
     },
   });

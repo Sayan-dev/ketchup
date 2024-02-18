@@ -221,7 +221,7 @@ android {
         release {
             storeFile file('ketchup-release-key.keystore')
             storePassword '123456'
-            keyAlias 'ketchup-release-key'
+            keyAlias 'release'
             keyPassword '123456'
         }
     }
