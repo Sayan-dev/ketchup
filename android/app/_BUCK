@@ -44,11 +44,26 @@ android_resource(
     res = "src/main/res",
 )
 
+#  Debug Build
+
 android_binary(
     name = "app",
     keystore = "//android/keystores:debug",
     manifest = "src/main/AndroidManifest.xml",
     package_type = "debug",
+    deps = [
+        ":app-code",
+    ],
+)
+
+
+# Prod Build
+
+android_binary(
+    name = "app",
+    keystore = "//android/keystores:release",
+    manifest = "src/main/AndroidManifest.xml",
+    package_type = "release",
     deps = [
         ":app-code",
     ],

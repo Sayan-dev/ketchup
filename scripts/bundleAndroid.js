@@ -13,7 +13,7 @@ console.log('Platform:', chalk.bgBlueBright.black(` ${os} `));
 let build;
 
 if (os === 'win32') {
-  build = spawn('./gradlew.bat', ['bundleRelease'], {
+  build = spawn('gradlew.bat', ['bundleRelease'], {
     cwd: 'android/',
   });
 } else {

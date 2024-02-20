@@ -38,10 +38,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
   };
 
   React.useEffect(() => {
-    if (dbUser.data) {
+    setTimeout(() => {
       bootstrap();
-    }
-  }, [initializing, dbUser.data]);
+    }, 2000);
+  }, [initializing]);
   return (
     <ScrollLayout edges={['top', 'left', 'right']}>
       <View style={styles.container}>
