@@ -1,4 +1,4 @@
-import { ApiResponse, Order, PreviousOrder } from '../../types/entities';
+import { ApiResponse, PreviousOrder } from '../../types/entities';
 import http from '../http';
 
 const BASE_URL = '/api/order';

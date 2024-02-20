@@ -28,7 +28,6 @@ import { DrawerParamList } from '../../HomeDrawerNavigator';
 import Logo from '../../assets/images/logo.png';
 import Typography from './Typography';
 import Button from './Button';
-import { remove } from '../../utils/storage';
 
 export interface SideBarProps extends DrawerContentComponentProps {
   state: DrawerNavigationState<DrawerParamList>;
@@ -144,7 +143,7 @@ const createStyles = (theme: ExtendedTheme) =>
       width: '100%',
       flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: 20,
+      paddingVertical: 16,
       borderBottomWidth: 2,
       borderColor: theme.colors.border,
     },
@@ -153,7 +152,7 @@ const createStyles = (theme: ExtendedTheme) =>
     text: {
       color: theme.colors.text,
       ...theme.fonts.bold,
-      fontSize: 20,
+      fontSize: 18,
     },
     textActive: {
       color: theme.colors.primary,

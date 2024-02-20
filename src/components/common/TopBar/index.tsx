@@ -1,16 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../Button';
 import type { ExtendedTheme } from '../../../types';
 import Typography from '../Typography';
 
 interface Props {
   goBack?: () => void;
+  onReload?: () => void;
+  willReload?: boolean;
   title: string;
   border?: number;
 }
-const Topbar = ({ goBack, title, border = 0 }: Props) => {
+const Topbar = ({ goBack, onReload, willReload = false, title, border = 0 }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
@@ -31,7 +34,11 @@ const Topbar = ({ goBack, title, border = 0 }: Props) => {
       <Typography style={styles.title} fontSize="h1" fontStyle="medium" color="background">
         {title}
       </Typography>
-      <Typography />
+      {willReload && (
+        <TouchableOpacity onPress={onReload} style={styles.reload}>
+          <Icon name="reload" color={theme.colors.text} style={styles.reloadIcon} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -58,5 +65,18 @@ const createStyles = (theme: ExtendedTheme) =>
       paddingRight: 6,
       paddingVertical: 6,
       left: 24,
+    },
+    reload: {
+      position: 'absolute',
+      right: 24,
+      width: 32,
+      height: 32,
+      borderRadius: 32,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: theme.colors.background,
+    },
+    reloadIcon: {
+      fontSize: 20,
     },
   });

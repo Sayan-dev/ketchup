@@ -3,15 +3,16 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ExtendedTheme } from '../../../types';
+import type { ExtendedTheme } from '../../../types';
 import Order from './Order';
 import { Order as OrderEntity } from '../../../types/entities';
 
 interface Props {
   orders: Record<string, OrderEntity>;
+  handlePressItem: (id: string) => void;
 }
 
-const OrderList = ({ orders }: Props) => {
+const OrderList = ({ orders, handlePressItem }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
@@ -19,7 +20,7 @@ const OrderList = ({ orders }: Props) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         {Object.values(orders).map(order => (
-          <Order data={order} />
+          <Order handlePressItem={() => handlePressItem(order._id)} data={order} />
         ))}
       </ScrollView>
     </SafeAreaView>

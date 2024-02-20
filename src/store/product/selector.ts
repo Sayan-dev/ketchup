@@ -1,4 +1,3 @@
-import { shallow } from 'zustand/shallow';
 import useProduct from '.';
 import { Order } from '../../types/entities';
 

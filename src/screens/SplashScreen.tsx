@@ -9,7 +9,7 @@ import type { ExtendedTheme } from '../types';
 import Logo from '../assets/images/logo.png';
 import useInitializeFirebase from '../hooks/useInitializeFirebase';
 import { get } from '../utils/storage';
-import { useGetUser, useLogin } from '../api/queries/auth.queries';
+import { useGetUser } from '../api/queries/auth.queries';
 import { useUser } from '../store/selector';
 
 type SplashScreenProps = NativeStackScreenProps<RootStackParamList, 'Splash'>;
@@ -22,7 +22,6 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
   const theme = useTheme();
   const styles = React.useMemo(() => createStyles(theme), [theme]);
 
-  console.log('Hello');
   const bootstrap = async () => {
     if (!initializing) {
       const introFlag = await get('@intro');
@@ -38,10 +37,12 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
   };
 
   React.useEffect(() => {
-    setTimeout(() => {
-      bootstrap();
-    }, 2000);
-  }, [initializing]);
+    if (!dbUser.isLoading) {
+      setTimeout(() => {
+        bootstrap();
+      }, 2000);
+    }
+  }, [initializing, dbUser.isLoading]);
   return (
     <ScrollLayout edges={['top', 'left', 'right']}>
       <View style={styles.container}>

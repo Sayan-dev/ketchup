@@ -1,21 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { ExtendedTheme } from '../../../types';
+import type { ExtendedTheme } from '../../../types';
 import Button from '../../common/Button';
 
 interface Props {
   onPress: () => void;
+  orderExists: boolean;
 }
 
-const AddToBasketButton = ({ onPress }: Props) => {
+const AddToBasketButton = ({ onPress, orderExists }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
       <Button onPress={onPress} style={styles.addButton}>
-        Add to basket
+        {orderExists ? 'Go to Basket' : 'Add to basket'}
       </Button>
     </View>
   );

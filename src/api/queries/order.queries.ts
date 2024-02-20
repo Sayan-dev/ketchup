@@ -1,13 +1,11 @@
 import Toast from 'react-native-toast-message';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Order } from '../../types/entities';
 import { OrderRequest, createOrder, fetchAllOrders } from '../requests/order.requests';
 import { ApiResponseError } from '../http';
 
 export const useCreateOrder = () =>
   useMutation<null, ApiResponseError, OrderRequest>(
     async data => {
-      console.log('hello');
       const res = await createOrder(data);
       return res.data;
     },

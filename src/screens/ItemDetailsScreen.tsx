@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@react-navigation/native';
+import { RouteProp, useRoute, useTheme } from '@react-navigation/native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import Toast from 'react-native-toast-message';
 import { RootStackParamList } from '../RootNavigator';
-import RootStackNavigationHeader from '../components/common/Header/StackNavigation/RootStackNavigationHeader';
-import { ExtendedTheme } from '../types';
+import type { ExtendedTheme } from '../types';
 import Preview from '../components/common/Images/PreviewImage';
 import BaseLayout from '../components/layouts/BaseLayout';
 import Counter from '../components/ItemDetails/Counter';
@@ -15,19 +15,23 @@ import Suggestions from '../components/ItemDetails/Suggestion';
 import ActionArea from '../components/ItemDetails/ActionArea';
 import useProductStore from '../store/product/selector';
 import useOrderStore from '../store/order/selector';
-import { useProduct } from '../api/queries/product.queries';
 import Topbar from '../components/common/TopBar';
 
 type ItemDetailsProps = NativeStackScreenProps<RootStackParamList, 'ItemDetails'>;
 
+export type ItemDetailsScreenParams = {
+  goBack: boolean;
+};
+
 const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
+  const route = useRoute<RouteProp<RootStackParamList, 'ItemDetails'>>();
+
   const theme = useTheme();
   const [count, setCount] = useState(0);
-  const [selectedItem, selectProduct, , addProduct, subProduct] = useProductStore();
-  const [orders, , createOrder, addOrder, subOrder] = useOrderStore();
+  const [selectedItem, , , addProduct, subProduct] = useProductStore();
+  const [orders, , createOrder, addOrder, subOrder, removeOrder] = useOrderStore();
 
   const styles = React.useMemo(() => createStyles(theme), [theme]);
-  const product = useProduct(selectedItem?._id);
 
   useEffect(() => {
     if (selectedItem) {
@@ -37,7 +41,8 @@ const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
   }, [selectedItem?.quantity, selectedItem && orders[selectedItem._id]?.quantity]);
 
   const navigateToOrderScreen = () => {
-    navigation.navigate('Orders');
+    if (route.params?.goBack) navigation.goBack();
+    else navigation.replace('Orders');
   };
 
   const handleCreateOrder = () => {
@@ -57,8 +62,15 @@ const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
   };
   const handleSubOrder = () => {
     if (selectedItem) {
-      if (orders[selectedItem._id]) subOrder(selectedItem._id);
-      else {
+      if (orders[selectedItem._id]) {
+        if (orders[selectedItem._id].quantity === 1) {
+          navigation.goBack();
+          removeOrder(selectedItem._id);
+          Toast.show({ text1: 'The Item has been removed' });
+        } else {
+          subOrder(selectedItem._id);
+        }
+      } else {
         subProduct();
       }
     }
@@ -88,7 +100,10 @@ const ItemDetailsScreen: React.FC<ItemDetailsProps> = ({ navigation }) => {
           />
           <InfoComponent />
           <Suggestions />
-          <ActionArea basketAction={handleAddToBasket} />
+          <ActionArea
+            orderExists={selectedItem ? orders[selectedItem._id] && true : false}
+            basketAction={handleAddToBasket}
+          />
         </View>
       </View>
     </BaseLayout>

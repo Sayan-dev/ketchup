@@ -3,6 +3,7 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { ExtendedTheme } from '../../../types';
 import { Order } from '../../../types/entities';
+import { getModifiedAmount } from '../../../utils/helper';
 
 interface Props {
   data: Order;
@@ -14,7 +15,7 @@ const Cost = ({ data }: Props) => {
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      <Text style={styles.cost}>${data.price}</Text>
+      <Text style={styles.cost}>${getModifiedAmount(data.price)}</Text>
     </View>
   );
 };

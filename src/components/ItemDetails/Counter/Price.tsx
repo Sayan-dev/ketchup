@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { ExtendedTheme } from '../../../types';
+import type { ExtendedTheme } from '../../../types';
+import { getModifiedAmount } from '../../../utils/helper';
 
 interface Props {
   price: number;
@@ -15,7 +16,7 @@ const Price = ({ price }: Props) => {
     <View style={styles.container}>
       <Text style={styles.body}>$</Text>
 
-      <Text style={styles.body}>{price}</Text>
+      <Text style={styles.body}>{getModifiedAmount(price)}</Text>
     </View>
   );
 };

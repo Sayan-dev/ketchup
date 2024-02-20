@@ -52,6 +52,8 @@ const useOrderSlice: StateCreator<Slice, [], [], OrderSlice> = set => ({
     set(prevState => {
       const newState = { ...prevState };
       if (newState.orders[orderId]) {
+        newState.total -= newState.orders[orderId].price || 0;
+
         delete newState.orders[orderId];
       }
       return newState;

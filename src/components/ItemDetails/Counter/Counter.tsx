@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { ExtendedTheme } from '../../../types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import type { ExtendedTheme } from '../../../types';
+import Typography from '../../common/Typography';
 
 interface Props {
   add: () => void;
@@ -15,13 +17,9 @@ const Counter = ({ add, sub, count }: Props) => {
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      <Text onPress={sub} style={[styles.body, styles.sub]}>
-        -
-      </Text>
-      <Text style={[styles.body, styles.count]}>{count}</Text>
-      <Text onPress={add} style={[styles.body, styles.add]}>
-        +
-      </Text>
+      <Icon name="minus" onPress={sub} style={[styles.body, styles.sub]} />
+      <Typography style={[styles.body, styles.count]}>{count}</Typography>
+      <Icon name="plus" onPress={add} style={[styles.body, styles.add]} />
     </View>
   );
 };
@@ -34,9 +32,10 @@ const createStyles = (theme: ExtendedTheme) =>
       flexDirection: 'row',
     },
     body: {
-      fontSize: 24,
+      fontSize: 30,
       height: 32,
       width: 32,
+
       justifyContent: 'center',
       alignItems: 'center',
       color: theme.colors.text,
@@ -51,6 +50,7 @@ const createStyles = (theme: ExtendedTheme) =>
     },
     count: {
       marginHorizontal: 20,
+      fontSize: 24,
 
       textAlign: 'center',
     },

@@ -14,7 +14,6 @@ type Props = {
 
 const ActionItems = ({ selectItem, itemDetails }: Props) => {
   const theme = useTheme();
-  console.log(itemDetails);
 
   const styles = createStyles(theme);
   const handleSelectProduct = () => {

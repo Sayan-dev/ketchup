@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ExtendedTheme } from '../../../types';
 import Preview from '../../common/Images/PreviewImage';
 import Cost from './Cost';
@@ -9,14 +10,15 @@ import { Order as OrderEntity } from '../../../types/entities';
 
 interface Props {
   data: OrderEntity;
+  handlePressItem: () => void;
 }
 
-const Order = ({ data }: Props) => {
+const Order = ({ data, handlePressItem }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={handlePressItem} style={styles.container}>
       <View style={styles.info}>
         <View style={styles.image}>
           <Preview height={40} width={40} />
@@ -25,7 +27,7 @@ const Order = ({ data }: Props) => {
       </View>
 
       <Cost data={data} />
-    </View>
+    </TouchableOpacity>
   );
 };
 

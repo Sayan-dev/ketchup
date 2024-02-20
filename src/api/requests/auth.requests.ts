@@ -7,4 +7,4 @@ export const registerWithEmail = (data: Omit<UserRegisterRequest, 'password'>) =
   http.post<ApiResponse<{ user: User }>>(`${BASE_URL}/signup`, data);
 
 export const login = () => http.post<ApiResponse<{ user: User }>>(`${BASE_URL}/login`);
-export const getUser = () => http.post<ApiResponse<{ user: User }>>(`${BASE_URL}/`);
+export const getUser = () => http.get<ApiResponse<{ user: User }>>(`${BASE_URL}/`);

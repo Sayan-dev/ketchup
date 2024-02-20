@@ -11,7 +11,7 @@ import { navigationRef } from './utils/navigation';
 import GetStartedScreen from './screens/GetStartedScreen';
 import SignupScreen from './screens/SignupScreen';
 import LoginScreen from './screens/LoginScreen';
-import ItemDetailsScreen from './screens/ItemDetailsScreen';
+import ItemDetailsScreen, { ItemDetailsScreenParams } from './screens/ItemDetailsScreen';
 import HomeScreen from './screens/HomeScreen';
 import TrackOrderScreen from './screens/TrackOrderScreen';
 import SuccessScreen from './screens/SuccessScreen';
@@ -24,7 +24,7 @@ export type RootStackParamList = {
   Signup?: undefined;
   Verify?: { hash?: string };
   Start: undefined;
-  ItemDetails?: undefined;
+  ItemDetails?: ItemDetailsScreenParams;
   HomeDrawer?: undefined;
   Orders?: undefined;
   Success?: undefined;

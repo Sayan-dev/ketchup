@@ -1,22 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { ExtendedTheme } from '../../../types';
+import type { ExtendedTheme } from '../../../types';
 import LikeButton from './Like';
 import AddToBasketButton from './AddToBasket';
 
 interface Props {
   basketAction: () => void;
+  orderExists: boolean;
 }
 
-const ActionArea = ({ basketAction }: Props) => {
+const ActionArea = ({ basketAction, orderExists = false }: Props) => {
   const theme = useTheme();
 
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
       <LikeButton />
-      <AddToBasketButton onPress={basketAction} />
+      <AddToBasketButton orderExists={orderExists} onPress={basketAction} />
     </View>
   );
 };

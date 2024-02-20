@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "android:release": "react-native run-android --variant release",
     "build:android": "node ./scripts/buildAndroid.js",
-    "bundle:android": "node ./scripts/bundleAndroid.js",
+    "bundle:android": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "clean": "node ./scripts/cleanAndroid.js",
     "ios": "react-native run-ios",
     "start": "react-native start",

@@ -19,6 +19,7 @@ import { useProducts } from '../api/queries/product.queries';
 import { DrawerParamList } from '../HomeDrawerNavigator';
 import Loading from '../components/common/Loader/LoadingModal';
 import { useUser } from '../store/selector';
+import useInitializeFirebase from '../hooks/useInitializeFirebase';
 
 type HomeScreenProps = CompositeScreenProps<
   DrawerScreenProps<DrawerParamList, 'Home'>,
@@ -27,6 +28,7 @@ type HomeScreenProps = CompositeScreenProps<
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [, selectProduct] = useProductStore();
+
   const products = useProducts();
   const theme = useTheme();
   const [user] = useUser();
@@ -43,7 +45,11 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     navigation.navigate('Orders');
   };
   const styles = React.useMemo(() => createStyles(theme), [theme]);
-  console.log(user, 'User');
+  // auth()
+  //   .currentUser?.getIdToken()
+  //   .then(res => {
+  //     console.log(res);
+  //   });
   return (
     <SafeAreaView style={styles.container}>
       <Loading
@@ -53,7 +59,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       <TopBar openDrawer={openDrawer} goToBasket={goToBasket} />
       <ScrollView style={styles.content}>
         <Heading user={user} />
-        <Search />
+        {/* <Search /> */}
         <RecommendedComponent selectItem={selectItem} products={products.data || []} />
         <FilterComponent selectItem={selectItem} products={products.data || []} />
       </ScrollView>

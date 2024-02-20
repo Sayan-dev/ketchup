@@ -57,6 +57,7 @@ const FilterComponent = ({ selectItem, products }: Props) => {
           <ScrollView horizontal style={styles.products}>
             {products.map(product => (
               <ItemCard
+                key={product._id}
                 data={product}
                 ActionItems={<ActionItems itemDetails={product} selectItem={selectItem} />}
                 options={{
